@@ -9,7 +9,7 @@
     <title>Magdalena Szymaniec</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=DM+Sans:wght@400;600&family=Gentium+Plus:wght@700&display=swap" rel="stylesheet" />
     <style>
       *, *::before, *::after {
         box-sizing: border-box;
@@ -26,7 +26,7 @@
         justify-content: center;
       }
 
-      a:not(.btn-cv) {
+      a:not(.btn-cv):not(.btn-case-study) {
         color: #302b36;
         text-decoration: underline;
         text-underline-offset: 3px;
@@ -35,7 +35,7 @@
         transition: color 0.15s ease, text-decoration-color 0.15s ease;
       }
 
-      a:not(.btn-cv):hover {
+      a:not(.btn-cv):not(.btn-case-study):hover {
         color: #9b90cc;
         text-decoration-color: #9b90cc;
       }
@@ -149,6 +149,133 @@
         line-height: 1.55;
       }
 
+      .case-study {
+        background-color: #f3f1fe;
+        padding: 24px 24px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .cs-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .cs-date {
+        font-size: 0.8125rem;
+        color: #827d87;
+      }
+
+      .cs-title {
+        font-family: 'Gentium Plus', serif;
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: #302b36;
+        line-height: 1.2;
+      }
+
+      .cs-description {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.55;
+      }
+
+      .cs-preview {
+        background-color: #f7f6fa;
+        width: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        overflow-x: auto;
+        border: 1px solid #d8d2f0;
+      }
+
+      .cs-preview .cs-screen {
+        height: 180px;
+        width: auto;
+        flex-shrink: 0;
+        display: block;
+        border-radius: 6px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+      }
+
+      .screen-slot {
+        display: grid;
+        grid-template-rows: 180px;
+        grid-template-columns: max-content;
+        flex-shrink: 0;
+        border-radius: 7px;
+        background-color: #eae5fc;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+      }
+
+      .screen-slot img {
+        grid-area: 1 / 1;
+        height: 180px;
+        width: auto;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+
+      .screen-wrap {
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      #cursor-pill {
+        position: fixed;
+        pointer-events: none;
+        background-color: #302b36;
+        color: #ffffff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 999px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        z-index: 100;
+        transform: translate(14px, -50%);
+      }
+
+      #cursor-pill.visible {
+        opacity: 1;
+      }
+
+      .cs-cta {
+        padding: 4px 0 8px;
+      }
+
+      .btn-case-study {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: #9b90cc;
+        color: #ffffff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 8px 16px;
+        transition: background-color 0.15s ease;
+      }
+
+      .btn-case-study:hover {
+        background-color: #8778bc;
+      }
+
+      .btn-case-study svg {
+        flex-shrink: 0;
+      }
+
       @media (min-width: 640px) {
         main {
           padding: 80px clamp(48px, 8vw, 160px);
@@ -182,6 +309,39 @@
           flex-direction: row;
           gap: 32px;
         }
+
+        .case-study {
+          padding: 40px clamp(48px, 8vw, 160px);
+          gap: 20px;
+        }
+
+        .cs-title {
+          font-size: 1.75rem;
+        }
+
+        .cs-description {
+          font-size: 1rem;
+          max-width: 60ch;
+        }
+
+        .cs-preview {
+          gap: 48px;
+          padding: 48px 40px;
+        }
+
+        .cs-preview .cs-screen {
+          height: 420px;
+        }
+
+        .screen-slot {
+          grid-template-rows: 420px;
+          border-radius: 16px;
+        }
+
+
+        .screen-slot img {
+          height: 420px;
+        }
       }
     </style>
   </head>
@@ -207,6 +367,40 @@
         </div>
       </main>
 
+      <section class="case-study">
+        <div class="cs-meta">
+          <span class="cs-date">2025–2026</span>
+          <h2 class="cs-title">Blindmate Onboarding</h2>
+        </div>
+
+        <p class="cs-description">Most dating apps onboard one type of user (you guessed it, the single). Blindmate is different because friends swipe for their singles as Matchmakers. (not to mention, you can do both — swipe for others and get matches at the same time…) That's three distinct user types, one front door, and a concept nobody's seen before. You can't use the app without your friends either, so the trust required to sign up is high.<br /><br />This is the story of rewiring a mental model for a dating app that flips the dating app script.</p>
+
+        <div class="cs-preview">
+          <div class="screen-wrap" data-label="The Welcome Screen AB test">
+            <div class="screen-slot">
+              <img src="/blindmate/welcome/en-safety-network.svg" alt="Safety network welcome screen" />
+              <img src="/blindmate/welcome/en-bm-shift.svg" alt="Blindmate shift welcome screen" />
+              <img src="/blindmate/welcome/en-mm-approach.svg" alt="Matchmaker approach welcome screen" />
+              <img src="/blindmate/welcome/en-no-ai.svg" alt="No AI welcome screen" />
+              <img src="/blindmate/welcome/en-testimonial.svg" alt="Testimonial welcome screen" />
+            </div>
+          </div>
+          <div class="screen-wrap" data-label="Finding out your role through a conversation">
+            <img class="cs-screen" src="/blindmate/conversational-onboarding.svg" alt="Conversational onboarding screen" />
+          </div>
+          <div class="screen-wrap" data-label="Friends are required to enter the Blindmate dimension">
+            <img class="cs-screen" src="/blindmate/invites-sent.svg" alt="Invites sent onboarding screen" />
+          </div>
+        </div>
+
+        <div class="cs-cta">
+          <a href="/blindmate-onboarding" class="btn-case-study">
+            Read case study
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          </a>
+        </div>
+      </section>
+
       <footer>
         <ul class="links">
           <li><a href="https://linkedin.com/in/magdalena-szymaniec-6a697246" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
@@ -216,5 +410,43 @@
         <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the expressed written consent of the author.</p>
       </footer>
     </div>
+    <div id="cursor-pill"></div>
+
+    <script>
+      // Crossfade animation
+      const imgs = Array.from(document.querySelectorAll('.screen-slot img'));
+      let idx = 0;
+
+      function next() {
+        imgs[idx].style.opacity = '0';
+        setTimeout(() => {
+          idx = (idx + 1) % imgs.length;
+          imgs[idx].style.opacity = '1';
+          setTimeout(next, 8000);
+        }, 700);
+      }
+
+      imgs[0].style.opacity = '1';
+      setTimeout(next, 8000);
+
+      // Cursor pill
+      const pill = document.getElementById('cursor-pill');
+      const wraps = document.querySelectorAll('.screen-wrap[data-label]');
+
+      wraps.forEach(wrap => {
+        wrap.addEventListener('mouseenter', () => {
+          pill.textContent = wrap.dataset.label;
+          pill.classList.add('visible');
+        });
+        wrap.addEventListener('mouseleave', () => {
+          pill.classList.remove('visible');
+        });
+      });
+
+      document.addEventListener('mousemove', e => {
+        pill.style.left = e.clientX + 'px';
+        pill.style.top = e.clientY + 'px';
+      });
+    </script>
   </body>
 </html>
