@@ -490,11 +490,31 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCaption = document.getElementById('lightbox-caption');
+        let lightboxItems = [];
+        let lightboxIdx = 0;
+        let touchStartX = 0;
+        let didSwipe = false;
 
-        function openLightbox(src, alt, caption) {
-          lightboxImg.src = src;
-          lightboxImg.alt = alt || '';
-          lightboxCaption.textContent = caption;
+        function getWrapImage(wrap) {
+          const slot = wrap.querySelector('.screen-slot');
+          if (slot) return Array.from(slot.querySelectorAll('img')).find(img => img.style.opacity === '1') || slot.querySelector('img');
+          return wrap.querySelector('img');
+        }
+
+        function showAt(i) {
+          lightboxIdx = (i + lightboxItems.length) % lightboxItems.length;
+          const item = lightboxItems[lightboxIdx];
+          lightboxImg.src = item.src;
+          lightboxImg.alt = item.alt || '';
+          lightboxCaption.textContent = item.caption;
+        }
+
+        function openLightbox(startIdx) {
+          lightboxItems = Array.from(wraps).map(wrap => {
+            const img = getWrapImage(wrap);
+            return { src: img.src, alt: img.alt, caption: wrap.dataset.label };
+          });
+          showAt(startIdx);
           lightbox.classList.add('open');
           lightbox.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
@@ -506,20 +526,24 @@
           document.body.style.overflow = '';
         }
 
-        lightbox.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('touchstart', e => {
+          touchStartX = e.touches[0].clientX;
+          didSwipe = false;
+        }, { passive: true });
 
-        wraps.forEach(wrap => {
-          wrap.addEventListener('click', () => {
-            const label = wrap.dataset.label;
-            const slot = wrap.querySelector('.screen-slot');
-            if (slot) {
-              const visibleImg = Array.from(slot.querySelectorAll('img')).find(img => img.style.opacity === '1') || slot.querySelector('img');
-              openLightbox(visibleImg.src, visibleImg.alt, label);
-            } else {
-              const img = wrap.querySelector('img');
-              openLightbox(img.src, img.alt, label);
-            }
-          });
+        lightbox.addEventListener('touchmove', e => {
+          if (Math.abs(e.touches[0].clientX - touchStartX) > 10) didSwipe = true;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(dx) > 50) showAt(lightboxIdx + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+
+        lightbox.addEventListener('click', () => { if (!didSwipe) closeLightbox(); });
+
+        wraps.forEach((wrap, i) => {
+          wrap.addEventListener('click', () => openLightbox(i));
         });
       }
     </script>
