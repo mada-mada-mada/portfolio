@@ -343,6 +343,41 @@
           height: 420px;
         }
       }
+
+      @media (hover: none) {
+        #cursor-pill { display: none; }
+        .screen-wrap[data-label] { cursor: pointer; }
+      }
+
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 200;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 32px 24px;
+      }
+
+      #lightbox.open { display: flex; }
+
+      #lightbox img {
+        max-width: 100%;
+        max-height: 72vh;
+        object-fit: contain;
+        border-radius: 16px;
+      }
+
+      #lightbox-caption {
+        color: #ffffff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -411,6 +446,10 @@
       </footer>
     </div>
     <div id="cursor-pill"></div>
+    <div id="lightbox" aria-hidden="true">
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption"></p>
+    </div>
 
     <script>
       // Crossfade animation
@@ -445,6 +484,44 @@
         pill.style.left = e.clientX + 'px';
         pill.style.top = e.clientY + 'px';
       });
+
+      // Mobile lightbox
+      if (window.matchMedia('(hover: none)').matches) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        function openLightbox(src, alt, caption) {
+          lightboxImg.src = src;
+          lightboxImg.alt = alt || '';
+          lightboxCaption.textContent = caption;
+          lightbox.classList.add('open');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+          lightbox.classList.remove('open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+
+        lightbox.addEventListener('click', closeLightbox);
+
+        wraps.forEach(wrap => {
+          wrap.addEventListener('click', () => {
+            const label = wrap.dataset.label;
+            const slot = wrap.querySelector('.screen-slot');
+            if (slot) {
+              const visibleImg = Array.from(slot.querySelectorAll('img')).find(img => img.style.opacity === '1') || slot.querySelector('img');
+              openLightbox(visibleImg.src, visibleImg.alt, label);
+            } else {
+              const img = wrap.querySelector('img');
+              openLightbox(img.src, img.alt, label);
+            }
+          });
+        });
+      }
     </script>
   </body>
 </html>
