@@ -1,0 +1,669 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/icon_magda.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="About Magdalena Szymaniec — Senior Product Designer & Art Director based in Berlin." />
+    <title>About — Magdalena Szymaniec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=DM+Sans:wght@400;600&family=Gentium+Plus:wght@700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      @keyframes page-fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #f7f6fa;
+        color: #302b36;
+        min-height: 100vh;
+        animation: page-fade-in 0.35s ease both;
+      }
+
+      a:not(.btn-cv):not(.btn-linkedin):not(.nav-link):not(.nav-identity) {
+        color: #302b36;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        text-decoration-color: #c8c5d0;
+        transition: color 0.15s ease, text-decoration-color 0.15s ease;
+      }
+
+      a:not(.btn-cv):not(.btn-linkedin):not(.nav-link):not(.nav-identity):hover {
+        color: #9b90cc;
+        text-decoration-color: #9b90cc;
+      }
+
+      /* ── Nav ── */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        background-color: #f7f6fa;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .nav-identity {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #302b36;
+      }
+
+      .nav-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #827d87;
+        text-decoration: none;
+        padding: 5px 14px;
+        border-radius: 999px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: #302b36;
+      }
+
+      .nav-link.active {
+        background-color: #9b90cc;
+        color: #ffffff;
+      }
+
+      .nav-link.active:hover {
+        background-color: #8778bc;
+      }
+
+      /* ── Intro ── */
+      .about-intro {
+        padding: 40px 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .about-text {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      h1 {
+        font-family: 'Lora', serif;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.25;
+      }
+
+      .body-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-top: 8px;
+      }
+
+      .btn-cv, .btn-linkedin {
+        display: inline-block;
+        background-color: #9b90cc;
+        color: #ffffff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px 20px;
+        transition: background-color 0.15s ease;
+      }
+
+      .btn-cv:hover, .btn-linkedin:hover {
+        background-color: #8778bc;
+      }
+
+      .about-photo-wrap {
+        display: none;
+      }
+
+      .about-photo {
+        width: 100%;
+        height: auto;
+        display: block;
+
+      }
+
+      /* ── Photo strip ── */
+      .photo-strip {
+        overflow: hidden;
+      }
+
+      .strip-track {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+        animation: scroll-photos 55s linear infinite;
+      }
+
+      .strip-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes scroll-photos {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+
+      .strip-item {
+        flex-shrink: 0;
+        position: relative;
+        margin-right: 4px;
+      }
+
+      .strip-item img {
+        height: 200px;
+        width: auto;
+        flex-shrink: 0;
+        object-fit: cover;
+        display: block;
+
+      }
+
+      /* ── Cursor pill ── */
+      #cursor-pill {
+        position: fixed;
+        pointer-events: none;
+        background-color: #302b36;
+        color: #ffffff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 999px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        z-index: 100;
+        transform: translate(14px, -50%);
+      }
+
+      #cursor-pill.visible { opacity: 1; }
+
+      /* ── Lightbox ── */
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 200;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 32px 24px;
+      }
+
+      #lightbox.open { display: flex; }
+
+      #lightbox img {
+        max-width: 100%;
+        max-height: 72vh;
+        object-fit: contain;
+        border-radius: 16px;
+      }
+
+      #lightbox-caption {
+        color: #ffffff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      @media (hover: none) {
+        #cursor-pill { display: none; }
+        .strip-item { cursor: pointer; }
+      }
+
+      /* ── Motto ── */
+      .motto-section {
+        padding: 48px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .motto-label {
+        font-size: 0.8125rem;
+        color: #827d87;
+      }
+
+      h2.motto-heading {
+        font-family: 'Lora', serif;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.25;
+      }
+
+      .logos-carousel {
+        overflow: hidden;
+        position: relative;
+        padding-top: 8px;
+      }
+
+      .logos-track {
+        display: flex;
+        align-items: center;
+        gap: 56px;
+        width: max-content;
+        animation: scroll-logos 32s linear infinite;
+      }
+
+      .logos-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes scroll-logos {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+
+      .logos-track img {
+        height: 24px;
+        width: auto;
+        display: block;
+        flex-shrink: 0;
+      }
+
+      /* ── Testimonials ── */
+      .testimonials-section {
+        padding: 48px 24px;
+        background-color: #f3f1fe;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      h2.section-heading {
+        font-family: 'Lora', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.25;
+      }
+
+      .t-card {
+        background-color: #f7f6fa;
+        border: 1px solid #d8d2f0;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .t-person {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .t-person img {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .t-name {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #302b36;
+      }
+
+      .t-role {
+        font-size: 0.875rem;
+        color: #827d87;
+      }
+
+      .t-quote {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .t-quote p {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── Footer ── */
+      footer {
+        background-color: #eae5fc;
+        padding: 24px 24px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        list-style: none;
+      }
+
+      .links a {
+        font-size: 0.9375rem;
+        font-weight: 400;
+      }
+
+      .copyright {
+        font-size: 0.8125rem;
+        color: #827d87;
+        line-height: 1.55;
+      }
+
+      /* ── Desktop ── */
+      @media (min-width: 640px) {
+        nav {
+          padding: 16px clamp(48px, 8vw, 160px);
+        }
+
+        .nav-identity {
+          display: flex;
+        }
+
+        .nav-identity img {
+          width: 34px;
+          height: 34px;
+        }
+
+        .about-intro {
+          padding: 80px clamp(48px, 8vw, 160px);
+        }
+
+        .about-text {
+          gap: 20px;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+          line-height: 1.2;
+        }
+
+        .body-text {
+          font-size: 1rem;
+          max-width: 58ch;
+        }
+
+        .strip-item img {
+          height: 300px;
+        }
+
+        .motto-section {
+          padding: 72px clamp(48px, 8vw, 160px);
+          gap: 20px;
+        }
+
+        h2.motto-heading {
+          font-size: 2.75rem;
+          max-width: 26ch;
+          line-height: 1.2;
+        }
+
+        .logos-carousel {
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .logos-track img {
+          height: 28px;
+        }
+
+        .testimonials-section {
+          padding: 72px clamp(48px, 8vw, 160px);
+          gap: 32px;
+        }
+
+        .t-card {
+          padding: 40px;
+          gap: 24px;
+          max-width: 720px;
+        }
+
+        h2.section-heading {
+          font-size: 2rem;
+        }
+
+        footer {
+          padding: 40px clamp(48px, 8vw, 160px) 56px;
+        }
+
+        .links {
+          flex-direction: row;
+          gap: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="nav-identity">
+        <img src="/icon_magda.svg" width="28" height="28" alt="" />
+        <span class="nav-name">Magdalena Szymaniec</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">home</a>
+        <a href="/about" class="nav-link active">about</a>
+      </div>
+    </nav>
+
+    <section class="about-intro">
+      <div class="about-text">
+        <h1>Who is Magdalena?</h1>
+        <p class="body-text">A geek since 1991, I grew up in Poland obsessed with books, art, video games, folklore and anything with a good symbol hidden in it. That curiosity eventually landed me a scholarship to the United World College Red Cross Nordic in Norway with people from every corner of the world, debate club, volunteering, art journals, the whole thing. I studied philosophy, wrote my Extended Essay on the infantilisation of Japanese society (kawaii culture deserves serious academic interest, obv), and learned something that stuck: <em>people's experiences shape everything about how they think and what they choose</em>. For a designer, that's foundational.</p>
+        <p class="body-text">From there, a Davis UWC Scholars scholarship took me to Ringling College of Art and Design to study illustration. The jump to UX was natural — illustrators solve problems, just like designers do. Same process, slightly different medium. I take real pride in having started with that craft, and I still paint.</p>
+        <p class="body-text">Berlin has been home for over ten years now, recently made official with a German passport. Outside of work I have an unreasonable number of hobbies: running (Munich HM, Berlin S25), yoga, pilates, miniature painting, games. And I like horses though whoever called them majestic has clearly never met one.</p>
+        <div class="cta-row">
+          <a href="/CV_magdalena.pdf" class="btn-cv" target="_blank" rel="noopener noreferrer">Download My CV</a>
+          <a href="https://linkedin.com/in/magdalena-szymaniec-6a697246" class="btn-linkedin" target="_blank" rel="noopener noreferrer">Check Out That LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="photo-strip">
+      <div class="strip-track">
+        <div class="strip-item" data-label="Visitng BoJack in Holywoo" data-original><img src="/about/main.png" alt="Visitng BoJack in Holywoo" /></div>
+        <div class="strip-item" data-label="In the wild" data-original><img src="/about/painting.png" alt="In the wild" /></div>
+        <div class="strip-item" data-label="That time I became Deutsch" data-original><img src="/about/german.png" alt="That time I became Deutsch" /></div>
+        <div class="strip-item" data-label="Iskra, my assistant" data-original><img src="/about/assistant.png" alt="Iskra, my assistant" /></div>
+        <div class="strip-item" data-label="How to train your dragon" data-original><img src="/about/horse.png" alt="How to train your dragon" /></div>
+        <div class="strip-item" data-label="Running 25km and hurting my foot" data-original><img src="/about/running.png" alt="Running 25km and hurting my foot" /></div>
+        <!-- duplicated for seamless loop -->
+        <div class="strip-item" data-label="Visitng BoJack in Holywoo" aria-hidden="true"><img src="/about/main.png" alt="" /></div>
+        <div class="strip-item" data-label="In the wild" aria-hidden="true"><img src="/about/painting.png" alt="" /></div>
+        <div class="strip-item" data-label="That time I became Deutsch" aria-hidden="true"><img src="/about/german.png" alt="" /></div>
+        <div class="strip-item" data-label="Iskra, my assistant" aria-hidden="true"><img src="/about/assistant.png" alt="" /></div>
+        <div class="strip-item" data-label="How to train your dragon" aria-hidden="true"><img src="/about/horse.png" alt="" /></div>
+        <div class="strip-item" data-label="Running 25km and hurting my foot" aria-hidden="true"><img src="/about/running.png" alt="" /></div>
+      </div>
+    </div>
+
+    <section class="motto-section">
+      <p class="motto-label">My motto</p>
+      <h2 class="motto-heading">The less ego at play, the better the design.</h2>
+      <p class="body-text">I believe the best design happens when ego gets out of the way. You're not designing for yourself — you're a vessel for understanding problems, using empathy, and creating meaning out of chaos. I've never chosen a project for portfolio appeal. Some of my most fascinating work has been on complex B2B problems that don't photograph well — and I wouldn't have it any other way.</p>
+      <p class="body-text">Below some of the companies I had a pleasure of collaborating with.</p>
+      <div class="logos-carousel">
+        <div class="logos-track">
+          <img src="/logos/barfers.svg" alt="Barfers" />
+          <img src="/logos/blindmate.svg" alt="Blindmate" />
+          <img src="/logos/trawa.svg" alt="Trawa" />
+          <img src="/logos/ziegert.svg" alt="Ziegert" />
+          <img src="/logos/db.svg" alt="Deutsche Bahn" />
+          <img src="/logos/homeday.svg" alt="Homeday" />
+          <img src="/logos/immoscout.svg" alt="ImmoScout" />
+          <img src="/logos/loreal.svg" alt="L'Oréal" />
+          <img src="/logos/moberries.svg" alt="MoBerries" />
+          <img src="/logos/vodafone.svg" alt="Vodafone" />
+          <img src="/logos/wohnvoll.svg" alt="Wohnvoll" />
+          <img src="/logos/deadinkbooks.svg" alt="Dead Ink Books" />
+          <!-- duplicated for seamless loop -->
+          <img src="/logos/barfers.svg" alt="" aria-hidden="true" />
+          <img src="/logos/blindmate.svg" alt="" aria-hidden="true" />
+          <img src="/logos/trawa.svg" alt="" aria-hidden="true" />
+          <img src="/logos/ziegert.svg" alt="" aria-hidden="true" />
+          <img src="/logos/db.svg" alt="" aria-hidden="true" />
+          <img src="/logos/homeday.svg" alt="" aria-hidden="true" />
+          <img src="/logos/immoscout.svg" alt="" aria-hidden="true" />
+          <img src="/logos/loreal.svg" alt="" aria-hidden="true" />
+          <img src="/logos/moberries.svg" alt="" aria-hidden="true" />
+          <img src="/logos/vodafone.svg" alt="" aria-hidden="true" />
+          <img src="/logos/wohnvoll.svg" alt="" aria-hidden="true" />
+          <img src="/logos/deadinkbooks.svg" alt="" aria-hidden="true" />
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials-section">
+      <h2 class="section-heading">Word on the streets</h2>
+      <div class="t-card">
+        <div class="t-person">
+          <img src="/about/laurenz.png" alt="Laurenz Reichl" />
+          <div>
+            <p class="t-name">Laurenz Reichl</p>
+            <p class="t-role">CEO, Co-Founder at Blindmate</p>
+          </div>
+        </div>
+        <div class="t-quote">
+          <p>Magda has been an incredible addition to the team from the first day of joining blindmate as a freelancer over a year ago. Needless to say she's an incredibly skilled UX/UI designer who gets stuff done and is 100% reliable.</p>
+          <p>But here's what makes Magda a real pleasure to work with:</p>
+          <p>#1 She's got true dedication to quality. Once she's made sure every detail works, Magda is not shy to improve on the original briefing.</p>
+          <p>#2 Our devs love her, even though she's a designer 😊. She approaches UI design with the mindset of an engineer, making implementation of her designs a breeze.</p>
+          <p>#3 And on top, Magda is simply a great human to work with. She's fun, authentic, straightforward, and smart. Really not much more you could ask for! It's been an absolute blast working with you, looking forward to many more features together!</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://linkedin.com/in/magdalena-szymaniec-6a697246" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://magdalenadraws.com/" target="_blank" rel="noopener noreferrer">Illustration Portfolio</a></li>
+        <li><a href="https://www.instagram.com/magdalenadraws/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+      <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the expressed written consent of the author.</p>
+    </footer>
+
+    <div id="cursor-pill"></div>
+    <div id="lightbox" aria-hidden="true">
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption"></p>
+    </div>
+
+    <script>
+      // Cursor pill
+      const pill = document.getElementById('cursor-pill');
+      const labelledItems = document.querySelectorAll('[data-label]');
+
+      labelledItems.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          pill.textContent = el.dataset.label;
+          pill.classList.add('visible');
+        });
+        el.addEventListener('mouseleave', () => pill.classList.remove('visible'));
+      });
+
+      document.addEventListener('mousemove', e => {
+        pill.style.left = e.clientX + 'px';
+        pill.style.top = e.clientY + 'px';
+      });
+
+      // Mobile lightbox with swipe
+      if (window.matchMedia('(hover: none)').matches) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const originals = Array.from(document.querySelectorAll('.strip-item[data-original]'));
+        const items = originals.map(el => {
+          const img = el.querySelector('img');
+          return { src: img.src, alt: img.alt, caption: el.dataset.label || '' };
+        });
+        let idx = 0;
+        let touchStartX = 0;
+        let didSwipe = false;
+
+        function showAt(i) {
+          idx = (i + items.length) % items.length;
+          lightboxImg.src = items[idx].src;
+          lightboxImg.alt = items[idx].alt;
+          lightboxCaption.textContent = items[idx].caption;
+        }
+
+        function open(i) {
+          showAt(i);
+          lightbox.classList.add('open');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function close() {
+          lightbox.classList.remove('open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+
+        lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; didSwipe = false; }, { passive: true });
+        lightbox.addEventListener('touchmove', e => { if (Math.abs(e.touches[0].clientX - touchStartX) > 10) didSwipe = true; }, { passive: true });
+        lightbox.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(dx) > 50) showAt(idx + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+        lightbox.addEventListener('click', () => { if (!didSwipe) close(); });
+
+        originals.forEach((el, i) => el.addEventListener('click', () => open(i)));
+      }
+
+      // Page fade-out on navigation
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          document.body.style.transition = 'opacity 0.2s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { window.location.href = href; }, 210);
+        });
+      });
+    </script>
+  </body>
+</html>

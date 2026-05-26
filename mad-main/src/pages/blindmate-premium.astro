@@ -1,0 +1,327 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/icon_magda.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Blindmate Premium — Case Study by Magdalena Szymaniec" />
+    <title>Blindmate Premium — Magdalena Szymaniec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=DM+Sans:wght@400;600&family=Gentium+Plus:wght@700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      @keyframes page-fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #f7f6fa;
+        color: #302b36;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        animation: page-fade-in 0.35s ease both;
+      }
+
+      a:not(.nav-link):not(.nav-identity) {
+        color: #302b36;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        text-decoration-color: #c8c5d0;
+        transition: color 0.15s ease, text-decoration-color 0.15s ease;
+      }
+
+      a:not(.nav-link):not(.nav-identity):hover {
+        color: #9b90cc;
+        text-decoration-color: #9b90cc;
+      }
+
+      /* ── Nav ── */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        background-color: #f7f6fa;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .nav-identity {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #302b36;
+      }
+
+      .nav-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #827d87;
+        text-decoration: none;
+        padding: 5px 14px;
+        border-radius: 999px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: #302b36;
+      }
+
+      .nav-link.active {
+        background-color: #9b90cc;
+        color: #ffffff;
+      }
+
+      .nav-link.active:hover {
+        background-color: #8778bc;
+      }
+
+      /* ── Header ── */
+      .cs-header {
+        padding: 40px 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .cs-year {
+        font-size: 0.8125rem;
+        color: #827d87;
+      }
+
+      .cs-title {
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.2;
+      }
+
+      .cs-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        display: inline-block;
+        background-color: #eae5fc;
+        color: #302b36;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 4px 14px;
+        border-radius: 999px;
+      }
+
+      /* ── WIP notice ── */
+      .wip-notice {
+        background-color: #eae5fc;
+        border-radius: 8px;
+        padding: 16px 20px;
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── Body ── */
+      .cs-body {
+        padding: 8px 24px 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        flex: 1;
+      }
+
+      .cs-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .cs-section-title {
+        font-family: 'Lora', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.3;
+      }
+
+      .body-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      .feature-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .feature-item {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      .feature-name {
+        font-weight: 600;
+      }
+
+      /* ── Footer ── */
+      footer {
+        background-color: #eae5fc;
+        padding: 24px 24px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        list-style: none;
+      }
+
+      .links a {
+        font-size: 0.9375rem;
+        font-weight: 400;
+      }
+
+      .copyright {
+        font-size: 0.8125rem;
+        color: #827d87;
+        line-height: 1.55;
+      }
+
+      /* ── Desktop ── */
+      @media (min-width: 640px) {
+        nav {
+          padding: 16px clamp(48px, 8vw, 160px);
+        }
+
+        .nav-identity {
+          display: flex;
+        }
+
+        .nav-identity img {
+          width: 34px;
+          height: 34px;
+        }
+
+        .cs-header {
+          padding: 80px clamp(48px, 8vw, 160px) 48px;
+          gap: 20px;
+        }
+
+        .cs-title {
+          font-size: 3rem;
+        }
+
+        .cs-body {
+          padding: 16px clamp(48px, 8vw, 160px) 80px;
+          gap: 48px;
+          max-width: calc(160px + 720px + 160px);
+        }
+
+        .cs-section-title {
+          font-size: 1.5rem;
+        }
+
+        .body-text {
+          font-size: 1rem;
+          max-width: 68ch;
+        }
+
+        .feature-item {
+          font-size: 1rem;
+          max-width: 68ch;
+        }
+
+        footer {
+          padding: 40px clamp(48px, 8vw, 160px) 56px;
+        }
+
+        .links {
+          flex-direction: row;
+          gap: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="nav-identity">
+        <img src="/icon_magda.svg" width="28" height="28" alt="" />
+        <span class="nav-name">Magdalena Szymaniec</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">home</a>
+        <a href="/about" class="nav-link">about</a>
+      </div>
+    </nav>
+
+    <div class="cs-header">
+      <span class="cs-year">2025</span>
+      <h1 class="cs-title">Blindmate Premium</h1>
+      <div class="cs-tags">
+        <span class="tag">B2C</span>
+        <span class="tag">Monetization</span>
+      </div>
+    </div>
+
+    <div class="cs-body">
+
+      <p class="wip-notice">Hey, it's currently a work in progress — check out my Case Study on <a href="/blindmate-onboarding">Blindmate Onboarding</a>.</p>
+
+    </div>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://linkedin.com/in/magdalena-szymaniec-6a697246" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://magdalenadraws.com/" target="_blank" rel="noopener noreferrer">Illustration Portfolio</a></li>
+        <li><a href="https://www.instagram.com/magdalenadraws/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+      <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the expressed written consent of the author.</p>
+    </footer>
+
+    <script>
+      // Page fade-out on navigation
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          document.body.style.transition = 'opacity 0.2s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { window.location.href = href; }, 210);
+        });
+      });
+    </script>
+  </body>
+</html>

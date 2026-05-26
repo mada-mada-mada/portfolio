@@ -1,0 +1,1432 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/icon_magda.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Blindmate Onboarding — Case Study by Magdalena Szymaniec" />
+    <title>Blindmate Onboarding — Magdalena Szymaniec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=DM+Sans:wght@400;600&family=Gentium+Plus:wght@700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      @keyframes page-fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #f7f6fa;
+        color: #302b36;
+        min-height: 100vh;
+        animation: page-fade-in 0.35s ease both;
+      }
+
+      a:not(.nav-link):not(.nav-identity) {
+        color: #302b36;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        text-decoration-color: #c8c5d0;
+        transition: color 0.15s ease, text-decoration-color 0.15s ease;
+      }
+
+      a:not(.nav-link):not(.nav-identity):hover {
+        color: #9b90cc;
+        text-decoration-color: #9b90cc;
+      }
+
+      /* ── Nav ── */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        background-color: #f7f6fa;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .nav-identity {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #302b36;
+      }
+
+      .nav-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #827d87;
+        text-decoration: none;
+        padding: 5px 14px;
+        border-radius: 999px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+      }
+
+      .nav-link:hover { color: #302b36; }
+
+      .nav-link.active {
+        background-color: #9b90cc;
+        color: #ffffff;
+      }
+
+      .nav-link.active:hover { background-color: #8778bc; }
+
+      /* ── Header ── */
+      .cs-header {
+        padding: 40px 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .cs-year {
+        font-size: 0.8125rem;
+        color: #827d87;
+      }
+
+      .cs-title {
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.2;
+      }
+
+      .cs-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        display: inline-block;
+        background-color: #eae5fc;
+        color: #302b36;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 4px 14px;
+        border-radius: 999px;
+      }
+
+      .tag--meta {
+        background-color: transparent;
+        color: #827d87;
+        font-weight: 400;
+        padding-left: 0;
+      }
+
+      /* ── Body ── */
+      .cs-body {
+        padding: 8px 24px 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .cs-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .cs-section-title {
+        font-family: 'Lora', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.3;
+      }
+
+      .cs-subsection-title {
+        font-family: 'Lora', serif;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.3;
+      }
+
+      .body-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── Tooltip terms ── */
+      .wall-term,
+      .glossary-term {
+        position: relative;
+        display: inline;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 3px;
+        cursor: help;
+        white-space: nowrap;
+      }
+
+      .wall-tip,
+      .glossary-tip {
+        display: none;
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #302b36;
+        color: #ffffff;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 1.5;
+        padding: 10px 16px;
+        border-radius: 6px;
+        white-space: normal;
+        max-width: 300px;
+        width: max-content;
+        text-align: center;
+        pointer-events: none;
+        z-index: 20;
+      }
+
+      @media (hover: hover) {
+        .wall-term:hover .wall-tip,
+        .glossary-term:hover .glossary-tip { display: block; }
+      }
+
+      /* ── Mobile Wall popup ── */
+      :global(#wall-popup-overlay) {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: transparent;
+      }
+
+      :global(#wall-popup) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        padding: 16px 24px 40px;
+        transform: translateY(100%);
+        transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+        z-index: 61;
+      }
+
+      :global(#wall-popup.open) { transform: translateY(0); }
+      :global(#wall-popup-overlay.open) { display: block; }
+
+      .wall-popup-handle {
+        width: 36px;
+        height: 4px;
+        background-color: #d8d2f0;
+        border-radius: 2px;
+        margin: 0 auto 16px;
+      }
+
+      .wall-popup-label {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #302b36;
+        margin-bottom: 8px;
+      }
+
+      .wall-popup-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      @media (hover: hover) {
+        :global(#wall-popup), :global(#wall-popup-overlay) { display: none !important; }
+      }
+
+      /* ── Mobile Glossary popup ── */
+      :global(#glossary-popup-overlay) {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: transparent;
+      }
+
+      :global(#glossary-popup) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        padding: 16px 24px 40px;
+        transform: translateY(100%);
+        transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+        z-index: 61;
+      }
+
+      :global(#glossary-popup.open) { transform: translateY(0); }
+      :global(#glossary-popup-overlay.open) { display: block; }
+
+      @media (hover: hover) {
+        :global(#glossary-popup), :global(#glossary-popup-overlay) { display: none !important; }
+      }
+
+      .img-caption--center { text-align: center; }
+
+      /* ── TL;DR box ── */
+      .tldr-box {
+        margin: 0 -24px;
+        padding: 24px;
+        background-color: #eae5fc;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .tldr-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #302b36;
+      }
+
+      .tldr-box p {
+        max-width: 68ch;
+      }
+
+      .tldr-columns {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .tldr-left {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* ── Stats ── */
+      .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 8px 0;
+      }
+
+      .stat-number {
+        display: block;
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1;
+      }
+
+      .stat-label {
+        display: block;
+        font-size: 0.875rem;
+        color: #827d87;
+        line-height: 1.4;
+        margin-top: 4px;
+      }
+
+      .meta-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .meta-item {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.55;
+      }
+
+      /* ── Bullet list ── */
+      .bullet-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-left: 20px;
+      }
+
+      .bullet-list li {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── Blockquotes ── */
+      .quote-block {
+        border-left: 3px solid #9b90cc;
+        padding: 12px 16px;
+        background-color: #f3f1fe;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .quote-text {
+        font-size: 0.9375rem;
+        font-style: italic;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      .quote-attr {
+        font-size: 0.8125rem;
+        color: #827d87;
+      }
+
+      .quote-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .quote-feature {
+        border: 1px solid #d8d2f0;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .quote-feature-icon {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        opacity: 0.45;
+      }
+
+      .quote-feature-text {
+        font-size: 0.9375rem;
+        font-style: italic;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      .strip-arrow {
+        flex-shrink: 0;
+        align-self: center;
+        display: block;
+        opacity: 0.5;
+      }
+
+      .img-pair {
+        display: flex;
+        gap: 64px;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      .img-pair .phone-shot {
+        flex: 0 0 auto;
+        width: 40%;
+        height: auto;
+      }
+
+      .img-hierarchy {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 24px;
+      }
+
+      .img-hierarchy img {
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .quote-block--hug {
+        align-self: flex-start;
+      }
+
+      /* ── Image strips ── */
+      .img-strip {
+        margin: 0 -24px;
+        padding: 24px;
+        overflow-x: auto;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        background-color: #f3f1fe;
+        border-top: 1px solid #d8d2f0;
+        border-bottom: 1px solid #d8d2f0;
+        scrollbar-width: none;
+      }
+
+      .img-strip::-webkit-scrollbar { display: none; }
+
+      .img-strip--captioned {
+        flex-direction: column;
+        overflow-x: visible;
+        padding: 0;
+        gap: 0;
+        align-items: center;
+      }
+
+      .img-strip--captioned .img-scroll-row {
+        padding: 24px 24px 0;
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+        justify-content: center;
+        overflow-x: visible;
+        width: 100%;
+      }
+
+      .img-strip--captioned .img-caption {
+        margin-top: 0;
+        padding: 12px 24px 24px;
+        text-align: center;
+      }
+
+
+      /* ── Before/After comparison ── */
+      .comparison-layout {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+      }
+
+      .comparison-phone {
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+
+        cursor: pointer;
+      }
+
+      .comparison-arrow {
+        flex-shrink: 0;
+        width: 36px;
+        height: auto;
+        display: block;
+        opacity: 0.45;
+        align-self: center;
+      }
+
+      .comparison-cards {
+        flex: 2 1 0;
+        min-width: 0;
+        display: flex;
+        gap: 8px;
+      }
+
+      .comparison-card {
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+
+        cursor: pointer;
+      }
+
+      @media (min-width: 640px) {
+        .comparison-layout {
+          justify-content: center;
+          gap: 32px;
+          align-items: center;
+        }
+
+        .comparison-phone { flex: 0 0 auto; width: auto; height: 380px; border-radius: 12px; }
+
+        .comparison-arrow { width: auto; height: 56px; }
+
+        .comparison-cards { flex: 0 0 auto; gap: 12px; }
+
+        .comparison-card { flex: 0 0 auto; width: auto; height: 380px; border-radius: 12px; }
+      }
+
+      .phone-shot {
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+
+        cursor: pointer;
+      }
+
+      /* ── Wide images ── */
+      .img-frame {
+        margin: 0 -24px;
+        padding: 24px;
+        background-color: #f3f1fe;
+        border-top: 1px solid #d8d2f0;
+        border-bottom: 1px solid #d8d2f0;
+      }
+
+      .wide-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+
+        cursor: pointer;
+      }
+
+      .img-caption {
+        font-size: 0.8125rem;
+        color: #827d87;
+        line-height: 1.5;
+        margin-top: 20px;
+        max-width: 52ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* ── Lightbox ── */
+      :global(#lightbox) {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 100;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 32px 24px;
+      }
+
+      :global(#lightbox.open) {
+        display: flex;
+      }
+
+      :global(#lightbox img) {
+        max-width: 100%;
+        max-height: 72vh;
+        object-fit: contain;
+        border-radius: 16px;
+      }
+
+      :global(#lightbox-caption) {
+        color: #ffffff;
+        font-size: 0.875rem;
+        opacity: 0.7;
+        text-align: center;
+        max-width: 480px;
+        line-height: 1.5;
+      }
+
+      :global(#lightbox-close) {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 4px 8px;
+        opacity: 0.8;
+      }
+
+      :global(#lightbox-close:hover) { opacity: 1; }
+
+      :global(#lightbox-prev),
+      :global(#lightbox-next) {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.12);
+        border: none;
+        color: #ffffff;
+        font-size: 2.25rem;
+        line-height: 1;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity 0.15s, background 0.15s;
+      }
+
+      :global(#lightbox-prev) { left: 12px; }
+      :global(#lightbox-next) { right: 12px; }
+
+      :global(#lightbox-prev:hover),
+      :global(#lightbox-next:hover) {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.22);
+      }
+
+      /* ── Footer ── */
+      footer {
+        background-color: #eae5fc;
+        padding: 24px 24px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        list-style: none;
+      }
+
+      .links a {
+        font-size: 0.9375rem;
+        font-weight: 400;
+      }
+
+      .copyright {
+        font-size: 0.8125rem;
+        color: #827d87;
+        line-height: 1.55;
+      }
+
+      /* ── Before / After animation ── */
+      @keyframes ba-before {
+        0%   { opacity: 1; }
+        35%  { opacity: 1; }
+        50%  { opacity: 0; }
+        85%  { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes ba-after {
+        0%   { opacity: 0; }
+        35%  { opacity: 0; }
+        50%  { opacity: 1; }
+        85%  { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      .before-after {
+        margin: 0 -24px;
+        padding: 24px;
+        background-color: #f3f1fe;
+        border-top: 1px solid #d8d2f0;
+        border-bottom: 1px solid #d8d2f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .ba-label-wrap {
+        display: grid;
+        justify-items: center;
+      }
+
+      .ba-label {
+        grid-area: 1 / 1;
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.2;
+      }
+
+      .ba-phones {
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .ba-slot {
+        flex: 1 1 0;
+        min-width: 0;
+        display: grid;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .ba-img {
+        grid-area: 1 / 1;
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .ba-before { animation: ba-before 10s ease-in-out infinite; }
+      .ba-after  { animation: ba-after  10s ease-in-out infinite; }
+
+      /* ── Desktop ── */
+      @media (min-width: 640px) {
+        .tldr-box {
+          margin: 0;
+          padding: 32px;
+        }
+
+        .tldr-columns {
+          flex-direction: row;
+          gap: 48px;
+          align-items: flex-start;
+        }
+
+        .tldr-left {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        .tldr-box .meta-list {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        .tldr-box p {
+          max-width: none;
+        }
+
+        nav {
+          padding: 16px clamp(48px, 8vw, 160px);
+        }
+
+        .nav-identity {
+          display: flex;
+        }
+
+        .nav-identity img {
+          width: 34px;
+          height: 34px;
+        }
+
+        .cs-header {
+          padding: 80px clamp(48px, 8vw, 160px) 48px;
+          gap: 20px;
+        }
+
+        .cs-title {
+          font-size: 3rem;
+        }
+
+        .cs-body {
+          padding: 16px clamp(48px, 8vw, 160px) 80px;
+          gap: 48px;
+        }
+
+        .cs-section-title {
+          font-size: 1.5rem;
+        }
+
+        .cs-subsection-title {
+          font-size: 1.25rem;
+        }
+
+        .body-text {
+          font-size: 1rem;
+          max-width: 68ch;
+        }
+
+        .meta-item {
+          font-size: 1rem;
+        }
+
+        .bullet-list {
+          max-width: 68ch;
+        }
+
+        .bullet-list li {
+          font-size: 1rem;
+        }
+
+        .stat-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 32px;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+        }
+
+        .quote-text {
+          font-size: 1rem;
+        }
+
+        .quote-feature-text {
+          font-size: 1rem;
+        }
+
+        .quote-group--three {
+          flex-direction: row;
+          align-items: flex-start;
+        }
+
+        .quote-group--three .quote-block {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        .img-strip {
+          margin: 0;
+          border: 1px solid #d8d2f0;
+          padding: 32px;
+          gap: 20px;
+        }
+
+        .img-strip--captioned {
+          padding: 0;
+        }
+
+        .img-strip--captioned .img-scroll-row {
+          padding: 32px 32px 0;
+          gap: 20px;
+          align-items: flex-end;
+          justify-content: center;
+          overflow-x: visible;
+        }
+
+        .img-strip--captioned .img-caption {
+          margin-top: 0;
+          padding: 12px 32px 32px;
+        }
+
+        .img-pair .phone-shot {
+          width: auto;
+          height: 420px;
+          border-radius: 12px;
+        }
+
+        .img-strip--welcome .phone-shot {
+          height: 320px;
+        }
+
+        .before-after {
+          margin: 0;
+          border: 1px solid #d8d2f0;
+          padding: 32px;
+        }
+
+        .ba-label {
+          font-size: 2rem;
+        }
+
+        .ba-phones {
+          gap: 20px;
+          width: auto;
+        }
+
+        .ba-slot {
+          flex: 0 0 auto;
+          width: 200px;
+        }
+
+        .img-hierarchy img {
+          flex: 0 0 auto;
+          width: 220px;
+          height: auto;
+          border-radius: 12px;
+        }
+
+        .phone-shot {
+          flex: 0 0 auto;
+          width: auto;
+          height: 420px;
+          border-radius: 12px;
+        }
+
+        .img-frame {
+          margin: 0;
+          border: 1px solid #d8d2f0;
+          padding: 32px;
+        }
+
+        footer {
+          padding: 40px clamp(48px, 8vw, 160px) 56px;
+        }
+
+        .links {
+          flex-direction: row;
+          gap: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="nav-identity">
+        <img src="/icon_magda.svg" width="28" height="28" alt="" />
+        <span class="nav-name">Magdalena Szymaniec</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">home</a>
+        <a href="/about" class="nav-link">about</a>
+      </div>
+    </nav>
+
+    <div class="cs-header">
+      <span class="cs-year">2024–2026</span>
+      <h1 class="cs-title">Blindmate Onboarding</h1>
+      <div class="cs-tags">
+        <span class="tag">B2C</span>
+        <span class="tag">App Onboarding</span>
+        <span class="tag tag--meta">10 min read</span>
+      </div>
+    </div>
+
+    <div class="cs-body">
+
+      <!-- TL;DR -->
+      <div class="tldr-box">
+        <p class="tldr-title">TL;DR</p>
+        <div class="tldr-columns">
+          <div class="tldr-left">
+            <p class="body-text">Onboarding to a dating app where your friends swipe for you is hard. I helped make it feel less complicated and more fun.</p>
+            <p class="body-text">I iterated on the Blindmate sign up process, funnelling users into the correct role, getting their info and having them invite friends.</p>
+          </div>
+          <div class="meta-list">
+            <p class="meta-item">🏆 <strong>Goal:</strong> Increased conversion rate</p>
+            <p class="meta-item">🏆 <strong>Secondary goal:</strong> improved concept awareness to create better quality user accounts</p>
+            <p class="meta-item">💁‍♀️ <strong>My role:</strong> sole designer on the project collaborating directly with the CEO and lead engineer with support from a user researcher</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">user tests across Germany and the US (LA)</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">10+</span>
+          <span class="stat-label">major flow iterations over 2 years</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">+5%</span>
+          <span class="stat-label">onboarding CVR projected from current welcome screen variants</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">#1</span>
+          <span class="stat-label">drop-off point → Role selection</span>
+        </div>
+      </div>
+
+      <!-- The challenge -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">The challenge</h2>
+        <p class="body-text">Blindmate has a structural onboarding problem most dating apps don't: three completely different user types — Singles, Matchmakers, and hybrids who do both — all entering through the same front door. Getting someone to understand what kind of app this is and which role they play in it, before they've even signed up, is pretty hard.</p>
+        <p class="body-text">On top of that, the app has a cold-start mechanic at its core: you can't use it without connecting to a friend first. We call the critical moment when users have to send out invites <span class="wall-term">"The Wall"<span class="wall-tip">Screen where users have to invite friends — otherwise they can't use the app</span></span>— and it was both our biggest retention risk and, if handled right, our biggest activation lever. Every step that leads the user to the wall has to be optimized for user's hype so that when they land there, they have no doubt about why they should invite a friend (or preferably many friends).</p>
+      </div>
+
+      <div class="img-frame">
+        <img class="wide-img" src="/onboarding/image1.png" alt="User journey map showing all paths converging at The Wall" />
+        <p class="img-caption img-caption--center">All roads lead to the Wall</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Why this matters</h2>
+        <p class="body-text">Onboarding is Blindmate's only shot at explaining a concept nobody has seen before. Unlike Tinder or Hinge, you can't just open the app and start using it — you have to understand why your friends need to be involved, commit to inviting them, and trust the mechanic before you've experienced a single moment of value.</p>
+      </div>
+
+      <!-- What I worked on -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">What I worked on</h2>
+        <ul class="bullet-list">
+          <li>Initial concept and user flow</li>
+          <li>Wireframes</li>
+          <li>Testing (AB tests and in-person moderated tests)</li>
+          <li>Design rebranding for the onboarding that later informed the general app facelift</li>
+        </ul>
+        <p class="body-text">Over multiple iterations, I redesigned almost every element of the onboarding flow: the <span class="glossary-term" data-term="Welcome screen" data-def="First screen the user sees after installing the app">welcome screen<span class="glossary-tip">First screen the user sees after installing the app</span></span>, <span class="glossary-term" data-term="Role Selection" data-def="Are you a dater, matchmaker or a dater-matchmaker on Blindmate">role selection<span class="glossary-tip">Are you a dater, matchmaker or a dater-matchmaker on Blindmate</span></span> (from one screen to a complete conversation), registration steps, various data inputs, <span class="glossary-term" data-term="The Wall" data-def="Screen where users have to invite friends — otherwise they can't use the app">The Wall<span class="glossary-tip">Screen where users have to invite friends — otherwise they can't use the app</span></span>, and the "ready checklist" experience once a friend connection is made. I also conducted and led user testing in Germany and the US, synthesising findings directly into design decisions and iterations.</p>
+      </div>
+
+      <div class="cs-section">
+        <p class="body-text">Speaking of <span class="glossary-term" data-term="Role Selection" data-def="Are you a dater, matchmaker or a dater-matchmaker on Blindmate">role selection<span class="glossary-tip">Are you a dater, matchmaker or a dater-matchmaker on Blindmate</span></span>: our initial design was a single screen that allowed the users to choose what they wanted to do on Blindmate. We wanted to optimize for a short flow, getting the users to invite a friend as soon as possible.</p>
+      </div>
+
+      <!-- Old role selection -->
+      <div class="img-strip img-strip--captioned">
+        <div class="img-scroll-row">
+          <img class="phone-shot" src="/onboarding/old_onboarding1.png" alt="Early onboarding — You can NOT swipe for yourself" />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="phone-shot" src="/onboarding/old_onboarding2.png" alt="Early onboarding screen 2" />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="phone-shot" src="/onboarding/old_onboarding3.png" alt="Early onboarding screen 3" />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="phone-shot" src="/onboarding/old_onboarding4.png" alt="Early onboarding screen 4" />
+        </div>
+        <p class="img-caption">We frontloaded the core message about the mechanic and make a user pick their role. A tough choice when your grasp on the concept is not fully established.</p>
+      </div>
+
+      <div class="cs-section">
+        <p class="body-text">Since Blindmate is a <strong>social</strong> dating app, we opted for a different strategy to get the users thinking about their friends and connections in a more organic manner. We called that the <span class="glossary-term" data-term="Conversational Onboarding" data-def="User finds out their role on Blindmate in a quiz-like manner">"Conversational Onboarding"<span class="glossary-tip">User finds out their role on Blindmate in a quiz-like manner</span></span>.</p>
+      </div>
+
+      <!-- Before/After comparison -->
+      <div class="img-frame">
+        <div class="comparison-layout">
+          <img class="comparison-phone" src="/onboarding/role_selection1.png" alt="Old role selection: What do you want to do?" />
+          <img class="comparison-arrow" src="/onboarding/arrow.svg" alt="" />
+          <div class="comparison-cards">
+            <img class="comparison-card" src="/onboarding/quiz1.svg" alt="Conversational onboarding: Who's love life are we working on?" />
+            <img class="comparison-card" src="/onboarding/quiz2.svg" alt="Conversational onboarding: Your friends will swipe for you" />
+          </div>
+        </div>
+        <p class="img-caption img-caption--center">Instead of asking a user a fairly technical question, we proposed to have them find out their role through a conversation.</p>
+      </div>
+
+      <div class="cs-section">
+        <p class="body-text">We let the users discover their role in a manner that would be conceptually appropriate for Blindmate—as a conversation. The approach came with a benefit: we could explain the functionality without long write-ups, and have the users see what Blindmate can do for them, in a personalised manner.</p>
+        <p class="body-text">We could also offer a lot of freedom: If the user said they'd like to swipe for their friends it doesn't necessarily mean their role would be limited to being a matchmaker. We could ask them if they'd <strong>also</strong> like their friends to swipe for them.</p>
+        <p class="body-text">The conversational aspect also led the user to think of their social circle, probing users to consider who they might eventually invite to the app, aka prepping them for <span class="wall-term">the Wall.<span class="wall-tip">Screen where users have to invite friends — otherwise they can't use the app</span></span></p>
+      </div>
+
+      <div class="img-frame">
+        <img class="wide-img" src="/onboarding/image4.png" alt="Full user flow diagram showing many iterations on copy, style, and placement" />
+        <p class="img-caption img-caption--center">The flow itself took many iterations on copy, style, placement, etc</p>
+      </div>
+
+      <div class="cs-section">
+        <p class="body-text">Here's a simplified version of the user flow:</p>
+      </div>
+
+      <div class="img-frame">
+        <img class="wide-img" src="/onboarding/user-flow.svg" alt="Simplified user flow diagram" />
+      </div>
+
+      <!-- User testing -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">User testing</h2>
+        <p class="body-text">The research phase was hands-on. I ran user tests in Berlin and Munich in Germany — parks, university campuses, public spaces — and later took the conversational redesign to Los Angeles for a two-week field research trip, testing at USC, LMU, and the Claremont colleges with over 50 participants total.</p>
+        <p class="body-text">Each test followed a consistent script: watch the user navigate the prototype (or later the live app), then ask structured questions about their understanding of the concept, their role, and their willingness to invite friends.</p>
+        <p class="body-text">Depending on the conversation I'd also ask about their dating app experience, habits and perceived fit for this kind of an app to see if we have any major gaps in our positioning (for example, if it comes across as a hookup app because of the color scheme or the concept itself feels appropriate for the younger audience or seems too serious for college kids.)</p>
+        <p class="body-text">Most users eventually understood the concept — but rarely from a single screen. As we hoped, understanding accumulated across the role selector, explanation screens, and the invite mechanic together. Users with dating app experience got there faster, because they already expected new apps to do something different. First-timers consistently assumed they could swipe for themselves, simply because "that's how every other dating app works". We had to dismantle the mental model gently without the user feeling like they're on too unfamiliar a ground.</p>
+      </div>
+
+      <div class="quote-group quote-group--three">
+        <div class="quote-block">
+          <p class="quote-text">"Super easy, fast. Takes you well by the hand. Easy language doesn't make it businessy profile creation. More of a 'with the app together' feeling."</p>
+          <p class="quote-attr">— Oskar, Germany</p>
+        </div>
+        <div class="quote-block">
+          <p class="quote-text">"This is a dating app where you can have your friends come along and do the magic for you or do the matching yourself and it's a good way to connect with friends, meet people, have fun conversations"</p>
+          <p class="quote-attr">— Nathan, LA</p>
+        </div>
+        <div class="quote-block">
+          <p class="quote-text">"You do this with people you trust"</p>
+          <p class="quote-attr">— Jule, LA</p>
+        </div>
+      </div>
+
+      <!-- Key design decisions -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">Key design decisions</h2>
+        <h3 class="cs-subsection-title">The Humour</h3>
+        <p class="body-text">The humour was divisive. Women generally loved it. Men split 50/50. There is no such thing as universally funny language and we were aware that becoming palatable to everyone would mean becoming bland. It was a tough battle between cringe and boring. We stripped the onboarding of the humour that led to any real confusion about the functionality.</p>
+        <h3 class="cs-subsection-title">Shorter = Better (?)</h3>
+        <p class="body-text">We observed users in test skimming the prototype for keywords, rather than reading full sentences. We tried a stripped down version that omitted any funny distractions and ask shorter, more direct questions: closer to "Are you single? Yes/No" rather than placing a user in a more ambiguous context of "How do you want to get started".</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="img-pair">
+          <img class="phone-shot" src="/onboarding/shorter1.svg" alt="Longer question: How do you want to get started?" />
+          <img class="phone-shot" src="/onboarding/shorter2.svg" alt="Shorter question: Are you single?" />
+        </div>
+        <p class="img-caption img-caption--center">We tested if removing humor and stripping down the questions to their simplest form will improve conversion. The simplified form didn't show any significant difference in the AB test so we reverted to the original, random buttons and all.</p>
+      </div>
+
+      <div class="cs-section">
+        <h3 class="cs-subsection-title">The wall</h3>
+        <p class="body-text">We spent a lot of time iterating on the final onboarding screen, where users are expected to connect with their friends, otherwise, as one user aptly remarked in the interview:</p>
+        <div class="quote-block quote-block--hug">
+          <p class="quote-text">"The app is dead until they join"</p>
+          <p class="quote-attr">— Josh, LA</p>
+        </div>
+        <p class="body-text">This page was crucial for user conversion. We needed it to be a crowning moment, the place when user shares the invite link with their friends and ideally, gets started right away. Our theory was that the user led through a conversational part would be gently guided to the culminating moment without a shock or disappointment.</p>
+      </div>
+
+      <div class="img-strip img-strip--captioned">
+        <div class="img-scroll-row">
+          <img class="phone-shot" src="/onboarding/wall1.png" alt="Wall iteration 1: Invite your friends" />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="phone-shot" src="/onboarding/wall2.png" alt="Wall iteration 2: Who's on Team Alex?" />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="phone-shot" src="/onboarding/wall3.png" alt="Wall iteration 3: Invite your 3 best friends" />
+        </div>
+        <p class="img-caption img-caption--center">Simplification and clarity in every iteration → send invites, connect with friends</p>
+      </div>
+
+      <div class="cs-section">
+        <p class="body-text">That page went through a number of iterations, from a version that required the users to invite 3 friends to one that relied heavily on the social network presentation and many forms in-between. We chose to try a lean <em>invite 3</em> version that states clearly that "You need at least 1 friend to use Blindmate". Goals were improved visual hierarchy and user understanding of what needs to be done to proceed.</p>
+        <p class="body-text">In the lean version, I found it particularly useful to separate the sent invites from actual friends joining, in the previous versions that distinction was not clear.</p>
+        <h3 class="cs-subsection-title">Early user invite</h3>
+        <p class="body-text">We added a soft wall for singles after observing that users never voluntarily took the concern route — the single path needed its own pause, where the "Oh, I really do need friends for this"–moment could stick. We also made the Wall skippable after users consistently said they wanted to set up their profile first before involving friends. Added framing to explain the benefit of inviting early without forcing it.</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="img-pair">
+          <img class="phone-shot" src="/onboarding/earlywall1.svg" alt="Early wall: skippable invite screen with 'Invite later' option" />
+          <img class="phone-shot" src="/onboarding/earlywall2.svg" alt="Early wall: confirmation prompt asking if user wants to invite friends later" />
+        </div>
+        <p class="img-caption img-caption--center">The early wall is a pause in the explanation of the mechanic that acts like a hint to the user → this will come later</p>
+      </div>
+
+      <div class="cs-section">
+        <h3 class="cs-subsection-title">Smaller changes</h3>
+        <ul class="bullet-list">
+          <li>Introduced a progress bar at the transition from conversational flow to profile setup — a visual cue marking the shift from "we're talking" to "now it's business."</li>
+          <li>Redesigned input fields to fit in with the conversational aesthetic</li>
+          <li>Simplified image upload after too many users got stuck. Larger clickable areas, more obvious plus signs.</li>
+          <li>Redesigned profile preview to be a lightweight explainer rather than an accurate simulation of a Blindmate profile — which was causing confusion about what users were expected to fill in themselves.</li>
+          <li>Switched to swipe-back navigation to make going back feel intuitive and mobile-first, freeing up screen space.</li>
+          <li>Created an abridged flow for ambassador contexts — when someone scans a QR code at an event, they've already heard the concept explained. Making them go through it again was redundant friction.</li>
+        </ul>
+      </div>
+
+      <!-- AB Tests -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">AB Tests</h2>
+        <p class="body-text">Alongside qualitative testing, we ran a significant number of AB tests. Most didn't move the needle — which is itself a finding. Simplified yes/no flows, early invite walls, wording changes — neutral or negative results across the board.</p>
+        <p class="body-text">The tests that did land: requiring 3 compulsory invites on The Wall lifted signup-to-first-invite conversion from 25.8% to 27.8%. A less prominent skip button on push notification opt-in increased opt-in for Singles and hybrids — but hurt Matchmaker opt-in rates, so the change was kept for some user types and rolled back for others. The team's conclusion: nudges work when aligned with user interest. When they're not, they backfire.</p>
+        <p class="body-text">Current welcome screen variants are still being tested, with early signals suggesting a potential +5% improvement in onboarding CVR — the biggest single lever we've found so far.</p>
+      </div>
+
+      <div class="img-strip img-strip--captioned img-strip--welcome">
+        <div class="img-scroll-row">
+          <img class="phone-shot" src="/onboarding/welcome1.png" alt="Welcome screen variant 1: Everyone here is someone's friend" />
+          <img class="phone-shot" src="/onboarding/welcome2.png" alt="Welcome screen variant 2: no AI" />
+          <img class="phone-shot" src="/onboarding/welcome3.png" alt="Welcome screen variant 3: set them up" />
+          <img class="phone-shot" src="/onboarding/welcome4.png" alt="Welcome screen variant 4: Nice!" />
+          <img class="phone-shot" src="/onboarding/welcome5.png" alt="Welcome screen variant 5: through friends" />
+        </div>
+        <p class="img-caption img-caption--center">First screen shapes the perception of the flow</p>
+      </div>
+
+      <!-- New user in discovery phase -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">New user in discovery phase</h2>
+        <p class="body-text">Another success was related to a profile progress checklist for new users. We chose to focus on the Blindmate values we hinted on in the onboarding: creating a strong social network to create a win-win situation for the user → the more friends they add, the stronger their social circle which leads to more matches, more visibility and additional benefits like a verified badge or custom profile colors, while boosting Blindmate's growth.</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="img-hierarchy">
+          <img class="hierarchy-img" src="/onboarding/checklist1.png" alt="Home screen showing new Blindchats and profile quality indicator" />
+          <img class="hierarchy-img" src="/onboarding/checklist2.png" alt="Complete your profile checklist with progress and tasks" />
+          <img class="hierarchy-img" src="/onboarding/checklist3.png" alt="Add friends panel showing milestones and rewards" />
+        </div>
+        <p class="img-caption img-caption--center">After the user got in, we asked them to complete their profiles, add more pictures, activate notifications, but most importantly, strengthen their social network by inviting friends to win awards, like a verified badge or custom profile colours.</p>
+      </div>
+
+      <!-- Learnings -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">Learnings</h2>
+        <p class="body-text">After over three years of onboarding optimization, I learned that optimization never ends (and that's a good thing). Onboarding is a living organism that should respond to the changing expectations of the users as well as company's priorities.</p>
+        <p class="body-text">It may seem frustrating but I find it fascinating that for every small improvement, there were 10 outcomes, that on paper didn't change anything. Subtle feelings and changes are hard to quantify either in user interviews or through sign-in data. The goal for me was to create a user journey free of UX paper-cuts that retains the app's slightly irreverent personality.</p>
+        <p class="body-text">Each iteration got us closer to an onboarding that feels honest about the mechanic without over-explaining. Creating a mood where you can't wait to invite your friends to swipe for you.</p>
+      </div>
+
+      <div class="before-after">
+        <div class="ba-label-wrap">
+          <span class="ba-label ba-before">then</span>
+          <span class="ba-label ba-after">now</span>
+        </div>
+        <div class="ba-phones">
+          <div class="ba-slot">
+            <img class="ba-img ba-before" src="/onboarding/before1.png" alt="Before: old role selection screen" />
+            <img class="ba-img ba-after"  src="/onboarding/after1.png"  alt="After: conversational role selection" />
+          </div>
+          <div class="ba-slot">
+            <img class="ba-img ba-before" src="/onboarding/before2.png" alt="Before: old name input screen" />
+            <img class="ba-img ba-after"  src="/onboarding/after2.png"  alt="After: improved name input" />
+          </div>
+          <div class="ba-slot">
+            <img class="ba-img ba-before" src="/onboarding/before3.png" alt="Before: old invite friends screen" />
+            <img class="ba-img ba-after"  src="/onboarding/after3.png"  alt="After: improved invite screen" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://linkedin.com/in/magdalena-szymaniec-6a697246" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://magdalenadraws.com/" target="_blank" rel="noopener noreferrer">Illustration Portfolio</a></li>
+        <li><a href="https://www.instagram.com/magdalenadraws/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+      <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the expressed written consent of the author.</p>
+    </footer>
+
+    <div id="lightbox">
+      <button id="lightbox-close" aria-label="Close">&#x2715;</button>
+      <button id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption"></p>
+      <button id="lightbox-next" aria-label="Next image">&#8250;</button>
+    </div>
+
+    <div id="glossary-popup-overlay"></div>
+    <div id="glossary-popup">
+      <div class="wall-popup-handle"></div>
+      <p class="wall-popup-label" id="glossary-popup-label"></p>
+      <p class="wall-popup-text" id="glossary-popup-text"></p>
+    </div>
+
+    <div id="wall-popup-overlay"></div>
+    <div id="wall-popup">
+      <div class="wall-popup-handle"></div>
+      <p class="wall-popup-label">The Wall</p>
+      <p class="wall-popup-text">Screen where users have to invite friends — otherwise they can't use the app</p>
+    </div>
+
+    <script>
+      // Wall bottom sheet (mobile) / tooltip (desktop via CSS hover)
+      const wallTerm = document.querySelector('.wall-term');
+      const wallPopup = document.getElementById('wall-popup');
+      const wallOverlay = document.getElementById('wall-popup-overlay');
+      if (wallTerm && wallPopup && wallOverlay) {
+        wallTerm.addEventListener('click', e => {
+          e.stopPropagation();
+          wallPopup.classList.add('open');
+          wallOverlay.classList.add('open');
+        });
+        wallOverlay.addEventListener('click', () => {
+          wallPopup.classList.remove('open');
+          wallOverlay.classList.remove('open');
+        });
+      }
+
+      // Generic glossary terms — bottom sheet on mobile
+      const glossaryPopup = document.getElementById('glossary-popup');
+      const glossaryOverlay = document.getElementById('glossary-popup-overlay');
+      const glossaryLabel = document.getElementById('glossary-popup-label');
+      const glossaryText = document.getElementById('glossary-popup-text');
+      if (glossaryPopup && glossaryOverlay) {
+        document.querySelectorAll('.glossary-term').forEach(term => {
+          term.addEventListener('click', e => {
+            e.stopPropagation();
+            glossaryLabel.textContent = term.dataset.term;
+            glossaryText.textContent = term.dataset.def;
+            glossaryPopup.classList.add('open');
+            glossaryOverlay.classList.add('open');
+          });
+        });
+        glossaryOverlay.addEventListener('click', () => {
+          glossaryPopup.classList.remove('open');
+          glossaryOverlay.classList.remove('open');
+        });
+      }
+
+      // Lightbox — grouped by frame, with swipe + keyboard + prev/next nav
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+
+      let lbItems = [];
+      let lbIdx = 0;
+
+      function lbShowAt(i) {
+        lbIdx = (i + lbItems.length) % lbItems.length;
+        const item = lbItems[lbIdx];
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.alt;
+        lightboxCaption.textContent = item.caption;
+        const multi = lbItems.length > 1;
+        lightboxPrev.style.display = multi ? '' : 'none';
+        lightboxNext.style.display = multi ? '' : 'none';
+      }
+
+      function lbOpen(clickedImg) {
+        const frame = clickedImg.closest('.img-frame, .img-strip');
+        const imgs = frame
+          ? Array.from(frame.querySelectorAll('.wide-img, .phone-shot, .comparison-phone, .comparison-card, .hierarchy-img'))
+          : [clickedImg];
+        const captionEl = frame ? frame.querySelector('.img-caption') : null;
+        const caption = captionEl ? captionEl.textContent.trim() : '';
+        lbItems = imgs.map(img => ({ src: img.src, alt: img.alt, caption }));
+        lbIdx = imgs.indexOf(clickedImg);
+        lbShowAt(lbIdx);
+        lightbox.classList.add('open');
+      }
+
+      function lbClose() { lightbox.classList.remove('open'); }
+
+      document.querySelectorAll('.wide-img, .phone-shot, .comparison-phone, .comparison-card, .hierarchy-img').forEach(img => {
+        img.addEventListener('click', () => lbOpen(img));
+      });
+
+      // Before/after slots — click opens all 6 images in lightbox
+      const baSlots = Array.from(document.querySelectorAll('.ba-slot'));
+      if (baSlots.length) {
+        const baAllImgs = Array.from(document.querySelectorAll('.before-after .ba-img'));
+        baSlots.forEach((slot, i) => {
+          slot.style.cursor = 'pointer';
+          slot.addEventListener('click', () => {
+            lbItems = baAllImgs.map(img => ({ src: img.src, alt: img.alt, caption: '' }));
+            lbShowAt(i * 2);
+            lightbox.classList.add('open');
+          });
+        });
+      }
+
+      lightboxClose.addEventListener('click', lbClose);
+      lightboxPrev.addEventListener('click', e => { e.stopPropagation(); lbShowAt(lbIdx - 1); });
+      lightboxNext.addEventListener('click', e => { e.stopPropagation(); lbShowAt(lbIdx + 1); });
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) lbClose(); });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'ArrowRight') lbShowAt(lbIdx + 1);
+        else if (e.key === 'ArrowLeft') lbShowAt(lbIdx - 1);
+        else if (e.key === 'Escape') lbClose();
+      });
+
+      // Touch swipe
+      let lbSwipeX = 0;
+      lightbox.addEventListener('touchstart', e => {
+        lbSwipeX = e.touches[0].clientX;
+      }, { passive: true });
+      lightbox.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - lbSwipeX;
+        if (Math.abs(dx) > 50) lbShowAt(lbIdx + (dx < 0 ? 1 : -1));
+      });
+
+      // Page fade-out on navigation
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          document.body.style.transition = 'opacity 0.2s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { window.location.href = href; }, 210);
+        });
+      });
+    </script>
+  </body>
+</html>
