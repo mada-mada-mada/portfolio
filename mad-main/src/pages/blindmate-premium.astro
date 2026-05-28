@@ -27,8 +27,6 @@
         background-color: #f7f6fa;
         color: #302b36;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
         animation: page-fade-in 0.35s ease both;
       }
 
@@ -87,18 +85,14 @@
         transition: color 0.2s ease, background-color 0.2s ease;
       }
 
-      .nav-link:hover {
-        color: #302b36;
-      }
+      .nav-link:hover { color: #302b36; }
 
       .nav-link.active {
         background-color: #9b90cc;
         color: #ffffff;
       }
 
-      .nav-link.active:hover {
-        background-color: #8778bc;
-      }
+      .nav-link.active:hover { background-color: #8778bc; }
 
       /* ── Header ── */
       .cs-header {
@@ -125,6 +119,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+        align-items: center;
       }
 
       .tag {
@@ -137,14 +132,11 @@
         border-radius: 999px;
       }
 
-      /* ── WIP notice ── */
-      .wip-notice {
-        background-color: #eae5fc;
-        border-radius: 8px;
-        padding: 16px 20px;
-        font-size: 0.9375rem;
-        color: #302b36;
-        line-height: 1.6;
+      .tag--meta {
+        background-color: transparent;
+        color: #827d87;
+        font-weight: 400;
+        padding-left: 0;
       }
 
       /* ── Body ── */
@@ -153,7 +145,6 @@
         display: flex;
         flex-direction: column;
         gap: 40px;
-        flex: 1;
       }
 
       .cs-section {
@@ -176,20 +167,494 @@
         line-height: 1.6;
       }
 
-      .feature-list {
+      .body-list {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 6px;
+        padding-left: 20px;
       }
 
-      .feature-item {
+      .body-list li {
         font-size: 0.9375rem;
         color: #302b36;
         line-height: 1.6;
       }
 
-      .feature-name {
+      /* ── Tooltip terms ── */
+      .glossary-term {
+        position: relative;
+        display: inline;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 3px;
+        cursor: help;
+        white-space: nowrap;
+      }
+
+      .glossary-tip {
+        display: none;
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #302b36;
+        color: #ffffff;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 1.5;
+        padding: 10px 16px;
+        border-radius: 6px;
+        white-space: normal;
+        max-width: 300px;
+        width: max-content;
+        text-align: center;
+        pointer-events: none;
+        z-index: 20;
+      }
+
+      @media (hover: hover) {
+        .glossary-term:hover .glossary-tip { display: block; }
+      }
+
+      /* ── Mobile Glossary popup ── */
+      :global(#glossary-popup-overlay) {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: transparent;
+      }
+
+      :global(#glossary-popup) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        padding: 16px 24px 40px;
+        transform: translateY(100%);
+        transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+        z-index: 61;
+      }
+
+      :global(#glossary-popup.open) { transform: translateY(0); }
+      :global(#glossary-popup-overlay.open) { display: block; }
+
+      @media (hover: hover) {
+        :global(#glossary-popup), :global(#glossary-popup-overlay) { display: none !important; }
+      }
+
+      .popup-handle {
+        width: 36px;
+        height: 4px;
+        background-color: #d8d2f0;
+        border-radius: 2px;
+        margin: 0 auto 16px;
+      }
+
+      .popup-label {
+        font-size: 0.9375rem;
         font-weight: 600;
+        color: #302b36;
+        margin-bottom: 8px;
+      }
+
+      .popup-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── TL;DR box ── */
+      .tldr-box {
+        margin: 0 -24px;
+        padding: 24px;
+        background-color: #eae5fc;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .tldr-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #302b36;
+      }
+
+      .tldr-box p {
+        max-width: 68ch;
+      }
+
+      .tldr-columns {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .tldr-left {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .meta-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .meta-item {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.55;
+      }
+
+      /* ── Stats ── */
+      .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 8px 0;
+      }
+
+      .stat-number {
+        display: block;
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1;
+      }
+
+      .stat-label {
+        display: block;
+        font-size: 0.875rem;
+        color: #827d87;
+        line-height: 1.4;
+        margin-top: 4px;
+      }
+
+      /* ── Image frame ── */
+      .img-frame {
+        margin: 0 -24px;
+        background-color: #f3f1fe;
+        border-top: 1px solid #d8d2f0;
+        border-bottom: 1px solid #d8d2f0;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .wide-img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .img-caption {
+        font-size: 0.8125rem;
+        color: #827d87;
+        margin-top: 20px;
+        line-height: 1.5;
+      }
+
+      .img-caption--center {
+        text-align: center;
+      }
+
+      /* ── Bullet list ── */
+      .bullet-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-left: 20px;
+      }
+
+      .bullet-list li {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── Carousel ── */
+      .cs-carousel-frame {
+        margin: 0 -24px;
+        background-color: #f3f1fe;
+        border-top: 1px solid #d8d2f0;
+        border-bottom: 1px solid #d8d2f0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 24px 0 28px;
+      }
+
+      .cs-carousel {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .cs-carousel-track {
+        display: flex;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+      }
+
+      .cs-slide {
+        flex: 0 0 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 0 24px;
+      }
+
+      .cs-slide-text {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-self: flex-start;
+      }
+
+      .cs-slide-title {
+        font-family: 'Lora', serif;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.3;
+      }
+
+      .cs-slide-desc {
+        font-size: 0.875rem;
+        color: #302b36;
+        line-height: 1.55;
+        max-width: 36ch;
+      }
+
+      .cs-slide img {
+        width: 100%;
+        max-width: 360px;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        display: block;
+        cursor: pointer;
+      }
+
+      /* Carousel arrows */
+      .cs-carousel-arrow {
+        display: none;
+      }
+
+      /* Pill indicator */
+      .cs-dots {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background-color: #c8c4e8;
+        border-radius: 999px;
+        padding: 6px 10px;
+      }
+
+      .cs-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background-color: #4f4789;
+        opacity: 0.4;
+        transition: width 0.25s ease, opacity 0.25s ease;
+        flex-shrink: 0;
+      }
+
+      .cs-dot.active {
+        width: 16px;
+        opacity: 1;
+      }
+
+      /* ── Features section ── */
+      .feature-list {
+        list-style: disc;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-left: 20px;
+      }
+
+      .feature-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+      }
+
+      .feature-row .body-text {
+        flex: 1 1 auto;
+      }
+
+      .feature-eye {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        vertical-align: middle;
+        margin-left: 5px;
+        position: relative;
+        top: -1px;
+      }
+
+      .placement-row {
+        cursor: pointer;
+      }
+
+      .feature-thumb {
+        display: none;
+      }
+
+      .features-imgs {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .features-imgs--placement {
+        gap: 20px;
+      }
+
+      .feature-img-wrap {
+        flex: 1 1 0;
+        min-width: 0;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .feature-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+        transform-origin: bottom center;
+        cursor: pointer;
+      }
+
+      .feature-img-label {
+        display: none;
+      }
+
+      /* ── Lightbox ── */
+      :global(#lightbox) {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.92);
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px;
+      }
+
+      :global(#lightbox.open) { display: flex; }
+
+      :global(#lightbox-img) {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+
+      :global(#lightbox-caption) {
+        color: #d8d2f0;
+        font-size: 0.8125rem;
+        text-align: center;
+        max-width: 60ch;
+      }
+
+      :global(#lightbox-close) {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        line-height: 1;
+        padding: 8px;
+      }
+
+      :global(#lightbox-prev),
+      :global(#lightbox-next) {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 3rem;
+        cursor: pointer;
+        padding: 8px 16px;
+        line-height: 1;
+      }
+
+      :global(#lightbox-prev) { left: 8px; }
+      :global(#lightbox-next) { right: 8px; }
+
+      /* ── Quotes ── */
+      .quote-block {
+        border-left: 3px solid #9b90cc;
+        padding: 12px 16px;
+        background-color: #f3f1fe;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .quote-text {
+        font-size: 0.9375rem;
+        font-style: italic;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      .quote-attr {
+        font-size: 0.8125rem;
+        color: #827d87;
+      }
+
+      .quote-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* ── Callout ── */
+      .callout-box {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background-color: #f3f1fe;
+        border: 1px solid #d8d2f0;
+        padding: 20px 24px;
+      }
+
+      .callout-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .callout-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
       }
 
       /* ── Footer ── */
@@ -221,6 +686,159 @@
 
       /* ── Desktop ── */
       @media (min-width: 640px) {
+        .img-frame {
+          margin: 0;
+          border: 1px solid #d8d2f0;
+          padding: 32px;
+        }
+
+        .img-frame .wide-img {
+          max-width: 360px;
+          margin: 0 auto;
+        }
+
+        .cs-carousel-frame {
+          margin: 0;
+          border: 1px solid #d8d2f0;
+          padding: 32px 0 36px;
+        }
+
+        .cs-slide {
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          gap: 40px;
+          padding: 0 40px;
+        }
+
+        .cs-slide-text {
+          flex: 0 0 200px;
+        }
+
+        .cs-slide img {
+          flex: 0 0 auto;
+          width: 360px;
+          max-width: none;
+        }
+
+        .features-imgs {
+          gap: 16px;
+        }
+
+        .features-imgs--placement {
+          gap: 28px;
+        }
+
+        .features-imgs--pricing {
+          gap: 32px;
+        }
+
+        .features-imgs--pricing .feature-img {
+          height: auto;
+          width: 100%;
+          max-width: 340px;
+        }
+
+        .feature-img-wrap {
+          flex: 0 0 auto;
+        }
+
+        .feature-img {
+          height: 360px;
+          width: auto;
+        }
+
+        .feature-img-label { display: none; }
+
+        :global(#feature-img-cursor-label) {
+          position: fixed;
+          pointer-events: none;
+          z-index: 90;
+          display: none;
+          background-color: #302b36;
+          color: #ffffff;
+          font-size: 0.75rem;
+          font-weight: 600;
+          white-space: nowrap;
+          padding: 5px 12px;
+          border-radius: 999px;
+          opacity: 0;
+          transition: opacity 0.15s ease;
+        }
+
+        :global(#feature-img-cursor-label.visible) {
+          display: block;
+          opacity: 1;
+        }
+
+        :global(#cursor-preview) {
+          position: fixed;
+          pointer-events: none;
+          z-index: 90;
+          display: none;
+          border-radius: 12px;
+          overflow: hidden;
+          transition: opacity 0.15s ease;
+          opacity: 0;
+          padding: 8px;
+          background-color: rgba(243, 241, 254, 0.95);
+          box-shadow: 0 4px 20px rgba(155, 144, 204, 0.25), 0 1px 4px rgba(155, 144, 204, 0.12);
+        }
+
+        :global(#cursor-preview.visible) {
+          display: block;
+          opacity: 1;
+        }
+
+        :global(#cursor-preview img) {
+          height: 220px;
+          width: auto;
+          display: block;
+          border-radius: 6px;
+        }
+
+
+        @media (hover: hover) {
+          .feature-img.highlighted {
+            transform: scale(1.08);
+          }
+
+          .feature-img.dimmed {
+            opacity: 0.5;
+            transform: scale(0.97);
+          }
+        }
+
+        .cs-carousel-arrow {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 40px;
+          height: 40px;
+          border-radius: 999px;
+          border: none;
+          background-color: #eae5fc;
+          color: #4f4789;
+          cursor: pointer;
+          font-size: 1.25rem;
+          line-height: 1;
+          transition: background-color 0.15s ease;
+          z-index: 2;
+        }
+
+        .cs-carousel-arrow:hover {
+          background-color: #d8d2f0;
+        }
+
+        .cs-carousel-arrow--prev { left: 16px; }
+        .cs-carousel-arrow--next { right: 16px; }
+
+        .cs-carousel-frame {
+          position: relative;
+        }
         nav {
           padding: 16px clamp(48px, 8vw, 160px);
         }
@@ -246,7 +864,6 @@
         .cs-body {
           padding: 16px clamp(48px, 8vw, 160px) 80px;
           gap: 48px;
-          max-width: calc(160px + 720px + 160px);
         }
 
         .cs-section-title {
@@ -258,9 +875,62 @@
           max-width: 68ch;
         }
 
-        .feature-item {
-          font-size: 1rem;
+        .callout-box {
           max-width: 68ch;
+        }
+
+        .tldr-box {
+          margin: 0;
+          padding: 32px;
+        }
+
+        .tldr-columns {
+          flex-direction: row;
+          gap: 48px;
+          align-items: flex-start;
+        }
+
+        .tldr-left {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        .tldr-box .meta-list {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        .tldr-box p {
+          max-width: none;
+        }
+
+        .meta-item {
+          font-size: 1rem;
+        }
+
+        .bullet-list {
+          max-width: 68ch;
+        }
+
+        .bullet-list li {
+          font-size: 1rem;
+        }
+
+        .body-list {
+          max-width: 68ch;
+        }
+
+        .body-list li {
+          font-size: 1rem;
+        }
+
+        .stat-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 32px;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
         }
 
         footer {
@@ -270,6 +940,22 @@
         .links {
           flex-direction: row;
           gap: 32px;
+        }
+
+        .quote-group--six {
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          gap: 20px;
+        }
+
+        .quote-group--six .quote-block {
+          flex: 1 1 calc(50% - 10px);
+          min-width: 0;
+        }
+
+        .quote-group--six .quote-block--fixed-col {
+          flex-grow: 0;
         }
       }
     </style>
@@ -292,12 +978,332 @@
       <div class="cs-tags">
         <span class="tag">B2C</span>
         <span class="tag">Monetization</span>
+        <span class="tag tag--meta">8 min read</span>
       </div>
     </div>
 
     <div class="cs-body">
 
-      <p class="wip-notice">Hey, it's currently a work in progress — check out my Case Study on <a href="/blindmate-onboarding">Blindmate Onboarding</a>.</p>
+      <!-- TL;DR -->
+      <div class="tldr-box">
+        <p class="tldr-title">TL;DR</p>
+        <div class="tldr-columns">
+          <div class="tldr-left">
+            <p class="body-text">Created a monetization offer for a social dating app, navigating branding constraints (a fair app that promised to be free) and the different <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.">user roles<span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span>.</p>
+          </div>
+          <div class="meta-list">
+            <p class="meta-item">🏆 <strong>Goal:</strong> Create a monetization model without hurting growth &amp; user trust</p>
+            <p class="meta-item">🧑‍🤝‍🧑 <strong>My role:</strong> sole designer on the project collaborating directly with the CEO and lead engineer with support from a user researcher. Whole team of 6 was involved in the ideation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="stat-number">2 months</span>
+          <span class="stat-label">time from brief to launch</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">5 features</span>
+          <span class="stat-label">shipped at launch</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">+200%</span>
+          <span class="stat-label">overall CVR growth in 5 months</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">6%</span>
+          <span class="stat-label">Singles CRV</span>
+        </div>
+      </div>
+
+      <!-- The challenge -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">The challenge</h2>
+        <p class="body-text">Blindmate is a social dating app where you don't swipe for yourself, your friends do it for you and you can also swipe for them. It's an app built on friendship and trust. Our monetization model had to reflect these values.</p>
+        <p class="body-text">Every feature we considered for premium had to clear a high bar: does this add genuine value, or does it just remove something users already had? Is it easy enough to build in a short amount of time? We opted for no matches hidden behind a subscription or artificial limits on core functionality. Premium had to be desirable without being coercive — something users would want, not a gate they'd resent.</p>
+      </div>
+
+      <!-- The model -->
+      <div class="cs-section">
+        <h2 class="cs-section-title">The model</h2>
+        <p class="body-text">With different <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.">user types<span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span> we had distinct motivations to design for. To simplify: for Singles, premium is about getting more (and better) matches. For Matchmakers, it's about doing right by their friend.</p>
+        <p class="body-text">Rather than treating these as separate products, we designed premium as a team deal: when a Single subscribes, their Matchmakers benefit too — and a Matchmaker can also gift premium directly to their Single friend. Either way, the Single "radiates" premium benefits to everyone swiping for them, regardless of who did the buying. This let us tap into altruism and social motivation alongside self-interest — something no other dating app is doing.</p>
+      </div>
+
+      <div class="img-frame">
+        <img class="wide-img" src="/premium/radiating-single.png" alt="A single friend radiates premium to their matchmakers" />
+        <p class="img-caption img-caption--center">A single friend radiates premium to their matchmakers</p>
+      </div>
+
+      <div class="cs-section">
+        <p class="body-text">But the fact that no other app is doing that meant we needed to be very clear about the model and let the user know who gets what. We couldn't afford adding additional friction points to a purchase decision so the model had to be easy enough to grasp.</p>
+        <p class="body-text">Below an example of an early rejected paywall for matchmakers buying premium for their crew. One easy conclusion was that over-explaining will not do us any good, only exaggerates the perceived complexity. We opted out of the distinction between matchmaker or single only premiums and a team deal in order to simplify the offer.</p>
+      </div>
+
+      <div class="img-frame">
+        <img class="wide-img" src="/premium/scary-paywall.png" alt="Early rejected paywall design for matchmakers — confusing three-way explanation" />
+        <p class="img-caption img-caption--center">One of the early rejected versions of the premium paywall for matchmakers, aka a clusterfuck.</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">What I worked on</h2>
+        <p class="body-text">My role spanned the full design process:</p>
+        <ul class="bullet-list">
+          <li>initial ideation with the team,</li>
+          <li>user testing with in-person user tests and surveys,</li>
+          <li>feature wireframing,</li>
+          <li>end-to-end feature design,</li>
+          <li>paywall design, and identifying where in the user journey conversion was most likely to happen.</li>
+          <li>post-rollout testing and iteration</li>
+        </ul>
+        <p class="body-text">The brief was to design something that felt like a natural extension of the product — not a set of patches bolted on top. Each of the five launch features had to be integrated into the existing user journey, feel coherent with the rest of the app, and strike the right balance between genuinely valuable and non-coercive or threatening.</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">What we built</h2>
+        <p class="body-text">First, we tested Premium as a concept to see what our users made of the idea of a staunchly free app introducing monetization. We run a series of premium smoke screen tests with initial paywalls.</p>
+        <p class="body-text">We wanted to determine which features are most desirable and what is the users' willingness to pay. We followed up with the in-depth survey where we presented the users with feature mockups and had them rate their interest.</p>
+      </div>
+
+      <div class="cs-carousel-frame" id="featureCarousel">
+        <button class="cs-carousel-arrow cs-carousel-arrow--prev" id="carouselPrev" aria-label="Previous">&#8249;</button>
+        <button class="cs-carousel-arrow cs-carousel-arrow--next" id="carouselNext" aria-label="Next">&#8250;</button>
+        <div class="cs-carousel">
+          <div class="cs-carousel-track" id="carouselTrack">
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">See Likes</p>
+                <p class="cs-slide-desc">Shows Matchmakers profiles that have already shown interest in the Single.</p>
+              </div>
+              <img src="/premium/see-who-liked-you.png" alt="See Likes feature" />
+            </div>
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">Time Machine</p>
+                <p class="cs-slide-desc">Allows Matchmakers to revisit all past swipes and upgrade them to likes anytime.</p>
+              </div>
+              <img src="/premium/time-machine.png" alt="Time Machine feature" />
+            </div>
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">Set Match Preferences</p>
+                <p class="cs-slide-desc">Both Single and Matchmaker can set preferences and deal-breakers like hard facts, character, or lifestyle traits. Blindmate will tailor profiles to match preferences and highlight deal-breakers.</p>
+              </div>
+              <img src="/premium/preferences.png" alt="Set Match Preferences feature" />
+            </div>
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">More Swipes</p>
+                <p class="cs-slide-desc">Matchmakers get 3x more daily swipes to explore more potential matches and maximize your Single's chances of finding someone special.</p>
+              </div>
+              <img src="/premium/more-swipes.png" alt="More Swipes feature" />
+            </div>
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">MegaTurboLikes</p>
+                <p class="cs-slide-desc">Unlocks 1 MegaTurboLike for each Matchmaker per day. These special likes grant extra visibility and increase the chances of a match.</p>
+              </div>
+              <img src="/premium/megaturbolike.png" alt="MegaTurboLikes feature" />
+            </div>
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">Compatibility Insights</p>
+                <p class="cs-slide-desc">Shows Matchmakers how well each profile aligns with their Single's attributes.</p>
+              </div>
+              <img src="/premium/compatibility-feature.png" alt="Compatibility Insights feature" />
+            </div>
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">Profile Insights</p>
+                <p class="cs-slide-desc">Gives singles insights into which photos, answers, and other elements get the most attention on their profile. Also allows them to rearrange their profile.</p>
+              </div>
+              <img src="/premium/advanced-profile-control.png" alt="Profile Insights feature" />
+            </div>
+            <div class="cs-slide">
+              <div class="cs-slide-text">
+                <p class="cs-slide-title">Add Media to Profiles</p>
+                <p class="cs-slide-desc">Matchmaker and Single get prompts to add photos, songs, or other elements to a Single's profile. This helps profiles stand out with even more character.</p>
+              </div>
+              <img src="/premium/add-media-to-profiles.png" alt="Add Media to Profiles feature" />
+            </div>
+          </div>
+        </div>
+        <div class="cs-dots" id="carouselDots">
+          <div class="cs-dot active"></div>
+          <div class="cs-dot"></div>
+          <div class="cs-dot"></div>
+          <div class="cs-dot"></div>
+          <div class="cs-dot"></div>
+          <div class="cs-dot"></div>
+          <div class="cs-dot"></div>
+          <div class="cs-dot"></div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <p class="body-text">We narrowed down the list of features using the following criteria:</p>
+        <ul class="bullet-list">
+          <li>how easy is the feature to grasp on just one glance or just from its name (e.g. explaining "Advanced profile control" proved more difficult than, e.g. "Seeing likes")</li>
+          <li>user ratings from the survey</li>
+          <li>we prioritized features with high impact and low effort for quick monetization rollout</li>
+        </ul>
+        <p class="body-text">As a result we built five features in under two months, each designed for either Singles, Matchmakers, or both.</p>
+        <ul class="feature-list">
+          <li>
+            <div class="feature-row" data-feature="filters">
+              <p class="body-text"><strong>Search Filters</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> — both the Single and their Matchmakers can set specific characteristics they're looking for, independently of each other. Each party can define up to five attributes — think "sporty", "tall", or "wants kids" — and receive curated profiles in the feed accordingly. The Single defines what they want; the Matchmakers can add their own read on what would work for their friend.</p>
+              <img class="feature-thumb" src="/premium/feature-filters.png" alt="Search Filters" data-title="Search Filters" data-feature="filters" />
+            </div>
+          </li>
+          <li>
+            <div class="feature-row" data-feature="analysis">
+              <p class="body-text"><strong>Image Analysis</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> — tracks how people interact with a Single's profile photos and recommends which to keep or change. A direct benefit for Singles trying to improve their match rate.</p>
+              <img class="feature-thumb" src="/premium/feature-analysis.png" alt="Image Analysis" data-title="Image Analysis" data-feature="analysis" />
+            </div>
+          </li>
+          <li>
+            <div class="feature-row" data-feature="see-likes">
+              <p class="body-text"><strong>See Likes</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> — lets Matchmakers instantly see if a profile has already liked their friend, so they can create a match right away. We also designed a version for Singles: rather than revealing the full profile (which would break Blindmate's core blind date mechanic), Singles see a small snippet and can forward it to their Matchmakers to act on. Wildly successful — and it preserved exactly what makes Blindmate feel different, while being a very comprehensive "standard" dating app feature.</p>
+              <img class="feature-thumb" src="/premium/feature-see-likes.png" alt="See Likes" data-title="See Likes" data-feature="see-likes" />
+            </div>
+          </li>
+          <li>
+            <div class="feature-row" data-feature="compatibility">
+              <p class="body-text"><strong>Compatibility</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> — gives Matchmakers an in-depth analysis of every profile they view and how well it matches their Single friend.</p>
+              <img class="feature-thumb" src="/premium/feature-compatibility.png" alt="Compatibility" data-title="Compatibility" data-feature="compatibility" />
+            </div>
+          </li>
+          <li>
+            <div class="feature-row" data-feature="swipes">
+              <p class="body-text"><strong>More Swipes</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> — gives all of a Single's Matchmakers 3x more daily swipes, letting them find more potential matches.</p>
+              <img class="feature-thumb" src="/premium/feature-swipes.png" alt="More Swipes" data-title="More Swipes" data-feature="swipes" />
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="img-frame">
+        <div class="features-imgs">
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="filters" data-title="Search Filters" src="/premium/feature-filters.png" alt="Search Filters" />
+            <span class="feature-img-label">Search Filters</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="analysis" data-title="Image Analysis" src="/premium/feature-analysis.png" alt="Image Analysis" />
+            <span class="feature-img-label">Image Analysis</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="see-likes" data-title="See Likes" src="/premium/feature-see-likes.png" alt="See Likes" />
+            <span class="feature-img-label">See Likes</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="compatibility" data-title="Compatibility" src="/premium/feature-compatibility.png" alt="Compatibility" />
+            <span class="feature-img-label">Compatibility</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="swipes" data-title="More Swipes" src="/premium/feature-swipes.png" alt="More Swipes" />
+            <span class="feature-img-label">More Swipes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Conversion design</h2>
+        <p class="body-text">Finding the right moments to surface premium was as important as the features themselves.</p>
+        <p class="body-text">Conversion touchpoints that worked well for <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate."><strong>Daters (Singles)</strong><span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span>:</p>
+        <ul class="body-list">
+          <li class="placement-row" data-preview-src="/premium/premium-placement-onboarding.png" data-preview-title="Onboarding"><strong>During onboarding</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> – following the "that's what you do on dating apps" and in the moment of excitement to grow their matchmaker network's efficiency.</li>
+          <li class="placement-row" data-preview-src="/premium/premium-placement-settings.png" data-preview-title="Settings page"><strong>In the settings page</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> – one of our top-converting touchpoints, capitalising on the user browsing through the app in their down time</li>
+          <li class="placement-row" data-preview-src="/premium/premium-placement-chats.png" data-preview-title="Chats page"><strong>On the chats page</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> – 2 versions of the banner we show singles on their chats page, targeting two different motivations – either the will to get more matches or to help their matchmakers (aka, help them help you)</li>
+          <li class="placement-row" data-preview-src="/premium/premium-placement-activity.png" data-preview-title="Activity log"><strong>In the activity log</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> – specific ads for highly desirable features like seeing likes were natural there</li>
+        </ul>
+        <p class="body-text">For <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate."><strong>Matchmakers</strong><span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span>, contextual moments worked best:</p>
+        <ul class="body-list">
+          <li class="placement-row" data-preview-src="/premium/premium-placement-swipes.png" data-preview-title="Swipe limit"><strong>When a Matchmaker runs out of swipes</strong><svg class="feature-eye" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4C4.5 4 1.5 6.5 1 8C1.5 9.5 4.5 12 8 12C11.5 12 14.5 9.5 15 8C14.5 6.5 11.5 4 8 4Z" stroke="#9b90cc" stroke-width="1.3" fill="none"/><circle cx="8" cy="8" r="2.2" fill="#9b90cc"/></svg> for their Single friend, the motivation to do something about it is already there — the banner just needs to show up at the right time.</li>
+        </ul>
+        <p class="body-text">Already today, one of our top-3 converting banners is a Matchmaker banner — for a user who isn't even buying premium for themselves. We iterated through multiple paywall designs, testing different structures, complexity levels, and feature combinations, continuously refining based on what converted and what didn't.</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="features-imgs features-imgs--placement">
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="placement-onboarding" data-title="Onboarding" src="/premium/premium-placement-onboarding.png" alt="Premium placement — Onboarding" />
+            <span class="feature-img-label">Onboarding</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="placement-settings" data-title="Settings page" src="/premium/premium-placement-settings.png" alt="Premium placement — Settings page" />
+            <span class="feature-img-label">Settings page</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="placement-activity" data-title="Activity log" src="/premium/premium-placement-activity.png" alt="Premium placement — Activity log" />
+            <span class="feature-img-label">Activity log</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="placement-chats" data-title="Chats page" src="/premium/premium-placement-chats.png" alt="Premium placement — Chats page" />
+            <span class="feature-img-label">Chats page</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="placement-swipes" data-title="Swipe limit" src="/premium/premium-placement-swipes.png" alt="Premium placement — Swipe limit" />
+            <span class="feature-img-label">Swipe limit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Pricing</h2>
+        <p class="body-text">Pricing was determined through AB testing, and the winner was a "Pay what you want" model — three price points, user's choice. It's a very Blindmate idea: it assumes good faith from users, and so far they've returned it.</p>
+        <p class="body-text">This model is also the easiest for users to grasp instead of separating the payment according to the duration and user type (e.g. matchmaker only premium, single only premium for 1, 2 or 3 months.)</p>
+        <p class="body-text">The message was streamlined:</p>
+        <ul class="body-list">
+          <li>as a <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate."><strong>Dater (Single)</strong><span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span> → you and ALL your matchmakers benefit, monthly for a price you select</li>
+          <li>as a <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate."><strong>Matchmaker</strong><span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span> → you buy premium for your single friend and all their matchmakers benefit, on a monthly basis for a price you select</li>
+        </ul>
+      </div>
+
+      <div class="img-frame">
+        <div class="features-imgs features-imgs--pricing">
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="pwyw" data-title="Pay What You Want model" src="/premium/pwyw-paywall.png" alt="Pay What You Want model" />
+            <span class="feature-img-label">Pay What You Want model</span>
+          </div>
+          <div class="feature-img-wrap">
+            <img class="feature-img" data-feature="timed-tiers" data-title="Timed Tiers model" src="/premium/tiered-paywall.png" alt="Timed Tiers model" />
+            <span class="feature-img-label">Timed Tiers model</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Results</h2>
+        <p class="body-text">We shipped five integrated features in under two months — and the metrics kept improving from there. CVR grew significantly in the first months, then continued climbing well beyond initial projections as we added two more features and refined our banners and pricing system. <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.">Singles<span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span> convert at 6% and <span class="glossary-term" data-term="User roles" data-def="You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.">Matchmakers<span class="glossary-tip">You are a dater (single looking to meet new people), matchmaker (you swipe for your friends) or a dater-matchmaker on Blindmate.</span></span> at 3.5% — a remarkable number for a user paying for someone else's benefit. Organic growth stayed completely intact throughout, and the payback period dropped well below industry benchmarks.</p>
+        <p class="body-text">Below some reactions from our Support Chat message announcement about Premium launch (translated from German):</p>
+        <div class="quote-group quote-group--six">
+          <div class="quote-block">
+            <p class="quote-text">"If you know your friends well enough to actually split the costs — that's a good idea. By the way, you've built a super app. By far the best dating app so far. Big props for the idea and the execution."</p>
+            <p class="quote-attr">Gabriel</p>
+          </div>
+          <div class="quote-block">
+            <p class="quote-text">"I just wanted to pass this on — this dating app is the only one where you actually date realistically. Much closer to real people and it feels more genuine."</p>
+            <p class="quote-attr">Anna</p>
+          </div>
+          <div class="quote-block quote-block--fixed-col">
+            <p class="quote-text">"Massive props for collecting a bunch of great features for Premium and adding them, instead of suddenly putting existing features behind a paywall and making the app only usable that way. Sounds really nice. By the way, quick real-life feedback: I now live together with the person I met through Blindmate. Thank you for that."</p>
+            <p class="quote-attr">Marco</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Learnins</h2>
+        <p class="body-text">Monetization design goes hand in hand with brand design. Every decision about what to gate, what to surface, and how to frame value is also a decision about what kind of company you are. The most interesting constraint on this project wasn't the timeline or the <span class="glossary-term" data-term="User model" data-def="Singles, Matchmakers, and Dater-Matchmakers — the three roles users can take on Blindmate, each with different motivations and relationships to premium.">user model<span class="glossary-tip">Singles, Matchmakers, and Dater-Matchmakers — the three roles users can take on Blindmate, each with different motivations and relationships to premium.</span></span> — it was designing a revenue stream that users would actually feel good about.</p>
+      </div>
+
+      <div class="callout-box">
+        <img class="callout-avatar" src="/premium/selfie.png" alt="Magdalena Szymaniec" />
+        <p class="callout-text">Curious about this project?<br>Don't hesitate to get in touch at <a href="mailto:magda.szymaniec@gmail.com">magda.szymaniec@gmail.com</a></p>
+      </div>
 
     </div>
 
@@ -310,7 +1316,283 @@
       <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the expressed written consent of the author.</p>
     </footer>
 
+    <div id="cursor-preview"><img src="" alt="" /></div>
+    <span id="feature-img-cursor-label"></span>
+
+    <div id="lightbox">
+      <button id="lightbox-close" aria-label="Close">&#x2715;</button>
+      <button id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption"></p>
+      <button id="lightbox-next" aria-label="Next image">&#8250;</button>
+    </div>
+
+    <div id="glossary-popup-overlay"></div>
+    <div id="glossary-popup">
+      <div class="popup-handle"></div>
+      <p class="popup-label" id="glossary-popup-label"></p>
+      <p class="popup-text" id="glossary-popup-text"></p>
+    </div>
+
     <script>
+      // Glossary terms — bottom sheet on mobile, tooltip on desktop (CSS hover)
+      const glossaryPopup = document.getElementById('glossary-popup');
+      const glossaryOverlay = document.getElementById('glossary-popup-overlay');
+      const glossaryLabel = document.getElementById('glossary-popup-label');
+      const glossaryText = document.getElementById('glossary-popup-text');
+      if (glossaryPopup && glossaryOverlay) {
+        document.querySelectorAll('.glossary-term').forEach(term => {
+          term.addEventListener('click', e => {
+            e.stopPropagation();
+            glossaryLabel.textContent = term.dataset.term;
+            glossaryText.textContent = term.dataset.def;
+            glossaryPopup.classList.add('open');
+            glossaryOverlay.classList.add('open');
+          });
+        });
+        glossaryOverlay.addEventListener('click', () => {
+          glossaryPopup.classList.remove('open');
+          glossaryOverlay.classList.remove('open');
+        });
+      }
+
+      // Lightbox
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+      let lbItems = [];
+      let lbIdx = 0;
+
+      function lbShowAt(i) {
+        lbIdx = (i + lbItems.length) % lbItems.length;
+        const item = lbItems[lbIdx];
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.alt;
+        lightboxCaption.textContent = item.caption;
+        const multi = lbItems.length > 1;
+        lightboxPrev.style.display = multi ? '' : 'none';
+        lightboxNext.style.display = multi ? '' : 'none';
+      }
+
+      function lbOpen(clickedImg) {
+        const frame = clickedImg.closest('.img-frame');
+        const imgs = frame
+          ? Array.from(frame.querySelectorAll('.wide-img'))
+          : [clickedImg];
+        const captionEl = frame ? frame.querySelector('.img-caption') : null;
+        const caption = captionEl ? captionEl.textContent.trim() : '';
+        lbItems = imgs.map(img => ({ src: img.src, alt: img.alt, caption }));
+        lbIdx = imgs.indexOf(clickedImg);
+        lbShowAt(lbIdx);
+        lightbox.classList.add('open');
+      }
+
+      function lbClose() { lightbox.classList.remove('open'); }
+
+      document.querySelectorAll('.wide-img').forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => lbOpen(img));
+      });
+
+      lightboxClose.addEventListener('click', lbClose);
+      lightboxPrev.addEventListener('click', e => { e.stopPropagation(); lbShowAt(lbIdx - 1); });
+      lightboxNext.addEventListener('click', e => { e.stopPropagation(); lbShowAt(lbIdx + 1); });
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) lbClose(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'ArrowRight') lbShowAt(lbIdx + 1);
+        else if (e.key === 'ArrowLeft') lbShowAt(lbIdx - 1);
+        else if (e.key === 'Escape') lbClose();
+      });
+
+      let lbSwipeX = 0;
+      lightbox.addEventListener('touchstart', e => { lbSwipeX = e.touches[0].clientX; }, { passive: true });
+      lightbox.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - lbSwipeX;
+        if (Math.abs(dx) > 50) lbShowAt(lbIdx + (dx < 0 ? 1 : -1));
+      });
+
+      // Carousel
+      const track = document.getElementById('carouselTrack');
+      const dotsContainer = document.getElementById('carouselDots');
+      if (track) {
+        const slides = Array.from(track.children);
+        const dots = Array.from(dotsContainer.children);
+        let current = 0;
+
+        // Hide dots if only one slide
+        if (slides.length <= 1) dotsContainer.style.display = 'none';
+
+        function goTo(i) {
+          current = (i + slides.length) % slides.length;
+          track.style.transform = `translateX(-${current * 100}%)`;
+          dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+        }
+
+        dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+        if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+
+        // Keyboard navigation
+        document.addEventListener('keydown', e => {
+          if (lightbox.classList.contains('open')) return;
+          if (e.key === 'ArrowRight') goTo(current + 1);
+          else if (e.key === 'ArrowLeft') goTo(current - 1);
+        });
+
+        // Touch swipe (mobile)
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+        });
+
+        // Mouse drag (desktop)
+        let mouseStartX = 0;
+        let isDragging = false;
+        track.addEventListener('mousedown', e => {
+          mouseStartX = e.clientX;
+          isDragging = true;
+          track.style.cursor = 'grabbing';
+        });
+        window.addEventListener('mouseup', e => {
+          if (!isDragging) return;
+          isDragging = false;
+          track.style.cursor = 'grab';
+          const dx = e.clientX - mouseStartX;
+          if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+        });
+        track.style.cursor = 'grab';
+
+        // Click image opens lightbox at that slide
+        slides.forEach((slide, i) => {
+          const img = slide.querySelector('img');
+          if (img) img.addEventListener('click', () => {
+            lbItems = slides.map(s => {
+              const si = s.querySelector('img');
+              const title = s.querySelector('.cs-slide-title');
+              return { src: si.src, alt: si.alt, caption: title ? title.textContent.trim() : '' };
+            });
+            lbShowAt(i);
+            lightbox.classList.add('open');
+          });
+        });
+      }
+
+      // Cursor-following feature preview
+      const cursorPreview = document.getElementById('cursor-preview');
+      const cursorPreviewImg = cursorPreview ? cursorPreview.querySelector('img') : null;
+      const featureThumbs = Array.from(document.querySelectorAll('.feature-thumb'));
+      const featureRows = Array.from(document.querySelectorAll('.feature-row'));
+
+      if (cursorPreview && window.matchMedia('(hover: hover)').matches) {
+        let activeThumb = null;
+        let hidePreviewTimer;
+
+        featureRows.forEach((row, i) => {
+          const thumb = featureThumbs[i];
+          const triggers = [row.querySelector('strong'), row.querySelector('.feature-eye')].filter(Boolean);
+
+          triggers.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+              clearTimeout(hidePreviewTimer);
+              if (!thumb) return;
+              activeThumb = thumb;
+              cursorPreviewImg.src = thumb.src;
+              cursorPreviewImg.alt = thumb.alt;
+              cursorPreview.classList.add('visible');
+            });
+            el.addEventListener('mouseleave', () => {
+              hidePreviewTimer = setTimeout(() => {
+                cursorPreview.classList.remove('visible');
+                activeThumb = null;
+              }, 50);
+            });
+          });
+
+          row.addEventListener('click', () => {
+            lbItems = featureThumbs.map(t => ({ src: t.src, alt: t.alt, caption: t.dataset.title || '' }));
+            lbShowAt(i);
+            lightbox.classList.add('open');
+          });
+        });
+
+        document.addEventListener('mousemove', e => {
+          if (!cursorPreview.classList.contains('visible')) return;
+          cursorPreview.style.left = (e.clientX + 20) + 'px';
+          cursorPreview.style.top = (e.clientY - cursorPreview.offsetHeight / 2) + 'px';
+        });
+
+        // Cursor preview for conversion section placement rows
+        const placementRows = Array.from(document.querySelectorAll('.placement-row'));
+        placementRows.forEach((row, i) => {
+          const src = row.dataset.previewSrc;
+          const title = row.dataset.previewTitle || '';
+          const triggers = [row.querySelector('strong'), row.querySelector('.feature-eye')].filter(Boolean);
+
+          triggers.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+              clearTimeout(hidePreviewTimer);
+              if (!src) return;
+              cursorPreviewImg.src = src;
+              cursorPreviewImg.alt = title;
+              cursorPreview.classList.add('visible');
+            });
+            el.addEventListener('mouseleave', () => {
+              hidePreviewTimer = setTimeout(() => cursorPreview.classList.remove('visible'), 50);
+            });
+          });
+
+          row.addEventListener('click', () => {
+            lbItems = placementRows.map(r => ({ src: r.dataset.previewSrc, alt: r.dataset.previewTitle || '', caption: r.dataset.previewTitle || '' }));
+            lbShowAt(i);
+            lightbox.classList.add('open');
+          });
+        });
+      }
+
+      // Feature images in bottom frame — cursor label + lightbox
+      const featureImgs = Array.from(document.querySelectorAll('.feature-img'));
+      const featureImgLabel = document.getElementById('feature-img-cursor-label');
+
+      if (featureImgLabel && window.matchMedia('(hover: hover)').matches) {
+        featureImgs.forEach((img, i) => {
+          const wrap = img.closest('.feature-img-wrap');
+          wrap.addEventListener('mouseenter', () => {
+            featureImgLabel.textContent = img.dataset.title || '';
+            featureImgLabel.classList.add('visible');
+          });
+          wrap.addEventListener('mouseleave', () => {
+            featureImgLabel.classList.remove('visible');
+          });
+        });
+
+        document.addEventListener('mousemove', e => {
+          if (!featureImgLabel.classList.contains('visible')) return;
+          featureImgLabel.style.left = (e.clientX + 14) + 'px';
+          featureImgLabel.style.top = (e.clientY + 14) + 'px';
+        });
+      }
+
+      featureImgs.forEach((img) => {
+        img.addEventListener('click', () => {
+          const frame = img.closest('.img-frame');
+          const frameImgs = frame ? Array.from(frame.querySelectorAll('.feature-img')) : [img];
+          const idx = frameImgs.indexOf(img);
+          lbItems = frameImgs.map(fi => ({ src: fi.src, alt: fi.alt, caption: fi.dataset.title || '' }));
+          lbShowAt(idx);
+          lightbox.classList.add('open');
+        });
+      });
+
       // Page fade-out on navigation
       document.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href');

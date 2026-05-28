@@ -687,6 +687,29 @@
       }
 
       /* ── Footer ── */
+      .callout-box {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background-color: #f3f1fe;
+        border: 1px solid #d8d2f0;
+        padding: 20px 24px;
+      }
+
+      .callout-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .callout-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
       footer {
         background-color: #eae5fc;
         padding: 24px 24px 40px;
@@ -851,6 +874,10 @@
 
         .meta-item {
           font-size: 1rem;
+        }
+
+        .callout-box {
+          max-width: 68ch;
         }
 
         .bullet-list {
@@ -1265,6 +1292,11 @@
             <img class="ba-img ba-after"  src="/onboarding/after3.png"  alt="After: improved invite screen" />
           </div>
         </div>
+      </div>
+
+      <div class="callout-box">
+        <img class="callout-avatar" src="/premium/selfie.png" alt="Magdalena Szymaniec" />
+        <p class="callout-text">Curious about this project?<br>Don't hesitate to get in touch at <a href="mailto:magda.szymaniec@gmail.com">magda.szymaniec@gmail.com</a></p>
       </div>
 
     </div>
