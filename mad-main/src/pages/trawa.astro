@@ -1,0 +1,649 @@
+---
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/icon_magda.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Trawa — Case Study by Magdalena Szymaniec" />
+    <title>Trawa — Magdalena Szymaniec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=DM+Sans:wght@400;600&family=Gentium+Plus:wght@700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      @keyframes page-fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #f7f6fa;
+        color: #302b36;
+        min-height: 100vh;
+        animation: page-fade-in 0.35s ease both;
+      }
+
+      a:not(.nav-link):not(.nav-identity) {
+        color: #302b36;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+        text-decoration-color: #c8c5d0;
+        transition: color 0.15s ease, text-decoration-color 0.15s ease;
+      }
+
+      a:not(.nav-link):not(.nav-identity):hover {
+        color: #9b90cc;
+        text-decoration-color: #9b90cc;
+      }
+
+      /* ── Nav ── */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        background-color: #f7f6fa;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .nav-identity {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #302b36;
+      }
+
+      .nav-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #827d87;
+        text-decoration: none;
+        padding: 5px 14px;
+        border-radius: 999px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+      }
+
+      .nav-link:hover { color: #302b36; }
+
+      .nav-link.active {
+        background-color: #9b90cc;
+        color: #ffffff;
+      }
+
+      .nav-link.active:hover { background-color: #8778bc; }
+
+      /* ── Header ── */
+      .cs-header {
+        padding: 40px 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .cs-year {
+        font-size: 0.8125rem;
+        color: #827d87;
+      }
+
+      .cs-title {
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.2;
+      }
+
+      .cs-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .tag {
+        display: inline-block;
+        background-color: #eae5fc;
+        color: #302b36;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 4px 14px;
+        border-radius: 999px;
+      }
+
+      .tag--meta {
+        background-color: transparent;
+        color: #827d87;
+        font-weight: 400;
+        padding-left: 0;
+      }
+
+      /* ── TL;DR box ── */
+      .tldr-box {
+        margin: 0 -24px;
+        padding: 24px;
+        background-color: #eae5fc;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .tldr-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #302b36;
+      }
+
+      .tldr-box p {
+        max-width: 68ch;
+      }
+
+      .tldr-columns {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .tldr-left {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .meta-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .meta-item {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.55;
+      }
+
+      /* ── Body ── */
+      .cs-body {
+        padding: 8px 24px 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .cs-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .cs-section-title {
+        font-family: 'Lora', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #302b36;
+        line-height: 1.3;
+      }
+
+      .body-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── Image frame ── */
+      .img-frame {
+        margin: 0 -24px;
+        background-color: #f3f1fe;
+        border-top: 1px solid #d8d2f0;
+        border-bottom: 1px solid #d8d2f0;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .wide-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        cursor: pointer;
+      }
+
+      .img-pair {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .img-pair .wide-img {
+        width: 100%;
+      }
+
+      .img-caption {
+        font-size: 0.8125rem;
+        color: #827d87;
+        margin-top: 20px;
+        max-width: 52ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .img-caption--center {
+        text-align: center;
+      }
+
+      /* ── Callout ── */
+      .callout-box {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background-color: #f3f1fe;
+        border: 1px solid #d8d2f0;
+        padding: 20px 24px;
+      }
+
+      .callout-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .callout-text {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
+      /* ── Lightbox ── */
+      :global(#lightbox) {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 100;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 20px;
+      }
+
+      :global(#lightbox.open) { display: flex; }
+
+      :global(#lightbox-img) {
+        max-width: 94vw;
+        max-height: 88vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 16px;
+      }
+
+      :global(#lightbox-caption) {
+        color: #ffffff;
+        font-size: 0.875rem;
+        opacity: 0.7;
+        text-align: center;
+        max-width: 480px;
+        line-height: 1.5;
+      }
+
+      :global(#lightbox-close) {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 4px 8px;
+        opacity: 0.8;
+      }
+
+      :global(#lightbox-close:hover) { opacity: 1; }
+
+      :global(#lightbox-prev),
+      :global(#lightbox-next) {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.12);
+        border: none;
+        color: #ffffff;
+        font-size: 2.25rem;
+        line-height: 1;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity 0.15s, background 0.15s;
+      }
+
+      :global(#lightbox-prev) { left: 12px; }
+      :global(#lightbox-next) { right: 12px; }
+
+      :global(#lightbox-prev:hover),
+      :global(#lightbox-next:hover) {
+        opacity: 1;
+        background: rgba(255, 255, 255, 0.22);
+      }
+
+      /* ── Footer ── */
+      footer {
+        background-color: #eae5fc;
+        padding: 24px 24px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        list-style: none;
+      }
+
+      .links a {
+        font-size: 0.9375rem;
+        font-weight: 400;
+      }
+
+      .copyright {
+        font-size: 0.8125rem;
+        color: #827d87;
+        line-height: 1.55;
+      }
+
+      /* ── Desktop ── */
+      @media (min-width: 640px) {
+        .img-frame {
+          margin: 0;
+          border: 1px solid #d8d2f0;
+          padding: 32px;
+        }
+
+        .img-pair {
+          flex-direction: row;
+          align-items: stretch;
+          gap: 16px;
+        }
+
+        .img-pair .wide-img {
+          width: calc(25% - 12px);
+          flex: 0 0 calc(25% - 12px);
+          height: 260px;
+          object-fit: cover;
+          min-width: 0;
+        }
+
+        nav {
+          padding: 16px clamp(48px, 8vw, 160px);
+        }
+
+        .nav-identity {
+          display: flex;
+        }
+
+        .nav-identity img {
+          width: 34px;
+          height: 34px;
+        }
+
+        .cs-header {
+          padding: 80px clamp(48px, 8vw, 160px) 48px;
+          gap: 20px;
+        }
+
+        .cs-title {
+          font-size: 3rem;
+        }
+
+        .cs-body {
+          padding: 16px clamp(48px, 8vw, 160px) 80px;
+          gap: 48px;
+        }
+
+        .cs-section-title {
+          font-size: 1.5rem;
+        }
+
+        .body-text {
+          font-size: 1rem;
+          max-width: 68ch;
+        }
+
+        .tldr-box {
+          margin: 0;
+          padding: 32px;
+        }
+
+        .tldr-columns {
+          flex-direction: row;
+          gap: 48px;
+          align-items: flex-start;
+        }
+
+        .tldr-left {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        .tldr-box .meta-list {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        .tldr-box p {
+          max-width: none;
+        }
+
+        .meta-item {
+          font-size: 1rem;
+        }
+
+        .callout-box {
+          max-width: 68ch;
+        }
+
+        footer {
+          padding: 40px clamp(48px, 8vw, 160px) 56px;
+        }
+
+        .links {
+          flex-direction: row;
+          gap: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="nav-identity">
+        <img src="/icon_magda.svg" width="28" height="28" alt="" />
+        <span class="nav-name">Magdalena Szymaniec</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">home</a>
+        <a href="/about" class="nav-link">about</a>
+      </div>
+    </nav>
+
+    <div class="cs-header">
+      <span class="cs-year">2024</span>
+      <h1 class="cs-title">Trawa: shaping the future of energy supply</h1>
+      <div class="cs-tags">
+        <span class="tag">B2B</span>
+        <span class="tag">Energy Procurement Dashboard</span>
+        <span class="tag tag--meta">2 min read</span>
+      </div>
+    </div>
+
+    <div class="cs-body">
+
+      <div class="tldr-box">
+        <p class="tldr-title">TL;DR</p>
+        <div class="tldr-columns">
+          <div class="tldr-left">
+            <p class="body-text">I designed a modular dashboard (and the design system behind it) that turns energy procurement — spot prices, green certificates, consumption data, contracts — into something an SME without a dedicated energy specialist can actually understand and act on.</p>
+          </div>
+          <div class="meta-list">
+            <p class="meta-item">🏆 <strong>Goal:</strong> Make complex energy data understandable without dumbing it down</p>
+            <p class="meta-item">🏆 <strong>Secondary goal:</strong> Build a system modular enough to grow with every client and every new product Trawa shipped</p>
+            <p class="meta-item">💁‍♀️ <strong>My role:</strong> Design lead working with product, engineering, data science, sales, and the CEO</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="img-frame">
+        <img class="wide-img" src="/trawa/hero.png" data-full="/trawa/home.png" alt="Trawa dashboard shown on laptop" />
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">The Trawa way</h2>
+        <p class="body-text">Trawa's mission is simple to say and hard to do: sustainable, professionally-managed energy for companies of any size — not just the ones large enough to have a procurement department. In practice, that meant taking tools normally reserved for big corporations (structured power purchase agreements, dynamic pricing, real market access) and making them usable by SMEs who'd never had access to any of it.</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">The challenge</h2>
+        <p class="body-text">Energy procurement comes with its own language, and most of it doesn't translate. Savings are vague, "green" is a marketing word before it's a fact, and figuring out who's actually offering renewable electricity — versus who's just saying so — takes more digging than most people have time for.</p>
+        <p class="body-text">Add to that: the person managing electricity contracts at a typical German SME rarely does it full-time. It's one line on a much longer to-do list, wedged between everything else that actually feels urgent.</p>
+        <p class="body-text">So the brief for the dashboard wasn't just "explain energy." It was: explain energy to someone who's busy, who doesn't want to be talked down to, and who needs to trust what they're looking at enough to act on it. And because no two SMEs run the same setup — some have their own solar, some don't, some are exploring batteries, some just want a clear invoice — the dashboard had to be modular from day one, built to flex around whatever a client's energy setup actually looked like.</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="img-pair">
+          <img class="wide-img" src="/trawa/workshop1.jpg" alt="Design workshop sketch — newsletter and physical status concepts" data-caption="I run a design ideation workshop with the team to understand the expectations of our clients and the topic in general. What is important?" />
+          <img class="wide-img" src="/trawa/workshop2.jpg" alt="Design workshop sketch — Trawa x Amano dashboard wireframe" data-caption="I run a design ideation workshop with the team to understand the expectations of our clients and the topic in general. What is important?" />
+          <img class="wide-img" src="/trawa/workshop3.jpg" alt="Design workshop sketch — money saved and site map concepts" data-caption="I run a design ideation workshop with the team to understand the expectations of our clients and the topic in general. What is important?" />
+          <img class="wide-img" src="/trawa/workshop4.jpg" alt="Design workshop sketch — timeline and live update concepts" data-caption="I run a design ideation workshop with the team to understand the expectations of our clients and the topic in general. What is important?" />
+        </div>
+        <p class="img-caption img-caption--center">I run a design ideation workshop with the team to understand the expectations of our clients and the topic in general. What is important?</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">First version</h2>
+        <p class="body-text">We started with the fundamentals: how much are you consuming, what's it costing you, and where is your green electricity actually coming from.</p>
+        <p class="body-text">What surprised us in early user interviews wasn't a design insight — it was a market one. The bar was low. Clients were genuinely impressed just to see their hourly consumption, or to have their invoices in one place without hunting for them. That gap became the first real signal that even the basics, done clearly, would be a meaningful upgrade for most of our users.</p>
+      </div>
+
+      <div class="callout-box">
+        <img class="callout-avatar" src="/premium/selfie.png" alt="Magdalena Szymaniec" />
+        <p class="callout-text">More of this case study is on the way. Curious in the meantime? Get in touch at <a href="mailto:magda.szymaniec@gmail.com">magda.szymaniec@gmail.com</a></p>
+      </div>
+
+    </div>
+
+    <footer>
+      <ul class="links">
+        <li><a href="https://linkedin.com/in/magdalena-szymaniec-6a697246" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://magdalenadraws.com/" target="_blank" rel="noopener noreferrer">Illustration Portfolio</a></li>
+        <li><a href="https://www.instagram.com/magdalenadraws/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+      <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the expressed written consent of the author.</p>
+    </footer>
+
+    <div id="lightbox">
+      <button id="lightbox-close" aria-label="Close">&#x2715;</button>
+      <button id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <p id="lightbox-caption"></p>
+      <button id="lightbox-next" aria-label="Next image">&#8250;</button>
+    </div>
+
+    <script>
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+      let lbItems = [];
+      let lbIdx = 0;
+
+      function lbShowAt(i) {
+        lbIdx = (i + lbItems.length) % lbItems.length;
+        const item = lbItems[lbIdx];
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.alt;
+        lightboxCaption.textContent = item.caption;
+        const multi = lbItems.length > 1;
+        lightboxPrev.style.display = multi ? '' : 'none';
+        lightboxNext.style.display = multi ? '' : 'none';
+      }
+
+      function lbOpen(clickedImg) {
+        const frame = clickedImg.closest('.img-frame');
+        const imgs = frame ? Array.from(frame.querySelectorAll('.wide-img')) : [clickedImg];
+        lbItems = imgs.map(img => ({
+          src: img.dataset.full || img.src,
+          alt: img.alt,
+          caption: img.dataset.caption || img.alt,
+        }));
+        lbShowAt(imgs.indexOf(clickedImg));
+        lightbox.classList.add('open');
+      }
+
+      function lbClose() { lightbox.classList.remove('open'); }
+
+      document.querySelectorAll('.wide-img').forEach(img => {
+        img.addEventListener('click', () => lbOpen(img));
+      });
+
+      lightboxClose.addEventListener('click', lbClose);
+      lightboxPrev.addEventListener('click', e => { e.stopPropagation(); lbShowAt(lbIdx - 1); });
+      lightboxNext.addEventListener('click', e => { e.stopPropagation(); lbShowAt(lbIdx + 1); });
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) lbClose(); });
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') lbClose();
+        else if (e.key === 'ArrowRight') lbShowAt(lbIdx + 1);
+        else if (e.key === 'ArrowLeft') lbShowAt(lbIdx - 1);
+      });
+
+      let lbSwipeX = 0;
+      lightbox.addEventListener('touchstart', e => { lbSwipeX = e.touches[0].clientX; }, { passive: true });
+      lightbox.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - lbSwipeX;
+        if (Math.abs(dx) > 50) lbShowAt(lbIdx + (dx < 0 ? 1 : -1));
+      });
+
+      // Page fade-out on navigation
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          document.body.style.transition = 'opacity 0.2s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { window.location.href = href; }, 210);
+        });
+      });
+    </script>
+  </body>
+</html>
