@@ -397,6 +397,110 @@
 
       }
 
+      /* ── Selected Work ── */
+      .work-section {
+        padding: 0 24px 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .work-header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .work-title {
+        font-family: 'Lora', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #302b36;
+      }
+
+      .work-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .filter-btn {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: #827d87;
+        background: none;
+        border: 1px solid #d8d2f0;
+        border-radius: 999px;
+        padding: 6px 14px;
+        cursor: pointer;
+        transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+      }
+
+      .filter-btn:hover {
+        color: #302b36;
+      }
+
+      .filter-btn.active {
+        background-color: #9b90cc;
+        border-color: #9b90cc;
+        color: #ffffff;
+      }
+
+      .pin-grid {
+        column-count: 2;
+        column-gap: 12px;
+      }
+
+      .pin {
+        position: relative;
+        break-inside: avoid;
+        margin-bottom: 12px;
+        overflow: hidden;
+        background-color: #f3f1fe;
+        border: 1px solid #d8d2f0;
+        cursor: pointer;
+      }
+
+      .pin.pin-hidden {
+        display: none;
+      }
+
+      .pin img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .pin-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        padding: 14px;
+        background: linear-gradient(to top, rgba(48, 43, 54, 0.95), rgba(48, 43, 54, 0.35) 65%, rgba(48, 43, 54, 0.35));
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .pin:hover .pin-overlay {
+        opacity: 1;
+      }
+
+      .pin-caption {
+        color: #ffffff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      @media (hover: none) {
+        .pin-overlay {
+          display: none;
+        }
+      }
+
       @media (min-width: 640px) {
         nav {
           padding: 16px clamp(48px, 8vw, 160px);
@@ -492,6 +596,30 @@
         .prem-item img {
           height: 300px;
         }
+
+        .work-section {
+          padding: 0 clamp(48px, 8vw, 160px) 16px;
+          gap: 28px;
+        }
+
+        .work-header {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .work-title {
+          font-size: 1.5rem;
+        }
+
+        .pin-grid {
+          column-count: 4;
+          column-gap: 20px;
+        }
+
+        .pin {
+          margin-bottom: 20px;
+        }
       }
 
       @media (hover: none) {
@@ -529,6 +657,49 @@
         font-weight: 600;
         text-align: center;
       }
+
+      #lightbox-close,
+      #lightbox-prev,
+      #lightbox-next {
+        position: fixed;
+        background: none;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        line-height: 1;
+        padding: 8px;
+      }
+
+      #lightbox-close {
+        top: 16px;
+        right: 16px;
+        font-size: 2rem;
+      }
+
+      #lightbox-prev,
+      #lightbox-next {
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 3rem;
+      }
+
+      #lightbox-prev {
+        left: 8px;
+      }
+
+      #lightbox-next {
+        right: 8px;
+      }
+
+      @media (min-width: 640px) {
+        #lightbox-prev {
+          left: 24px;
+        }
+
+        #lightbox-next {
+          right: 24px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -555,7 +726,7 @@
         <h1>Hi, Magdalena here! I'm a creative human based in Berlin, Germany.</h1>
 
         <p class="intro">
-          Welcome to my portfolio. It's currently a work in progress. Feel free to reach out at <a href="mailto:magda.szymaniec@gmail.com">magda.szymaniec@gmail.com</a>
+          Welcome to my portfolio. Feel free to reach out at <a href="mailto:magda.szymaniec@gmail.com">magda.szymaniec@gmail.com</a>
         </p>
 
         <div class="cta">
@@ -563,13 +734,106 @@
         </div>
       </main>
 
+      <section class="work-section">
+        <div class="work-header">
+          <h2 class="work-title">Selected Work</h2>
+          <div class="work-filters">
+            <button class="filter-btn active" data-filter="all" type="button">All</button>
+            <button class="filter-btn" data-filter="ux" type="button">UX + Strategy</button>
+            <button class="filter-btn" data-filter="illustration" type="button">Illustration</button>
+            <button class="filter-btn" data-filter="graphic" type="button">Graphic Design</button>
+          </div>
+        </div>
+
+        <div class="pin-grid">
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-allergien.png" alt="BARFER'S BARF calculator — allergy question step" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">I designed the BARFER'S dog and cat food calculator to help clients pick the most optimal food for their animals based on age, gender, weight, allergies, etc.</p></div>
+          </div>
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-barf-rechner.png" alt="BARFER'S BARF calculator — results screen" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">The results of the BARF calculator help the owners make informed decisions about their animals' nutrition.</p></div>
+          </div>
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-questions-bm.png" alt="Blindmate — redesigned profile questions feature" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">At Blindmate, users create each other's profiles by answering different types of questions about each other. I redesigned this feature to make it more engaging for the users, resembling a physical card game.</p></div>
+          </div>
+          <div class="pin" data-category="illustration">
+            <img src="/work/illustration/illustration-ai-bm.png" alt="Blindmate — AI-generated illustration pipeline for question cards" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">For the Blindmate questions redesign project, I created an AI pipeline to produce a consistent UI illustration style for over 300 questions in a little less than a week.</p></div>
+          </div>
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-b2b-catalogue.png" alt="and dos Santos — B2B catalog digitalization project" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">During my work at and dos Santos (Berlin-based innovation agency), I worked on projects aiming to activate offline users and bring them to the online platforms, for example through the company's catalog.</p></div>
+          </div>
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-mytoys-retail.png" alt="and dos Santos — myToys retail digitalization project" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">During my work at and dos Santos (Berlin-based innovation agency), I worked on projects aiming to activate offline users and bring them to the online platforms, for example through the company's catalog.</p></div>
+          </div>
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-house-type1.svg" alt="Homeday — tablet tool for realtors" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">At Homeday, I created a tablet-based tool for realtors to help them evaluate the property's value face-to-face with clients.</p></div>
+          </div>
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-chatgpt-mock.png" alt="Trawa — green energy procurement visualization" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">At Trawa, I had the pleasure of visualizing our client's energy procurement and highlighting their savings and use of green electricity.</p></div>
+          </div>
+          <div class="pin" data-category="ux">
+            <img src="/work/ux-strategy/ux-portrait.jpg" alt="Leading a UX workshop for Wohnvoll in Frankfurt am Main" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">Leading a UX workshop for Wohnvoll in Frankfurt am Main.</p></div>
+          </div>
+
+          <div class="pin" data-category="illustration">
+            <img src="/work/illustration/illustration-book-cover.png" alt="Book cover for Harry Gallon's 'Every Fox Is a Rabid Fox', Dead Ink Books" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">I created a cover design (typography and illustration) for Harry Gallon's debut novel "Every Fox Is a Rabid Fox", published by Dead Ink Books.</p></div>
+          </div>
+          <div class="pin" data-category="illustration">
+            <img src="/work/illustration/illustration-bowie.jpg" alt="David Bowie mixed-media portrait" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">Personal experimentation with traditional media and typography.</p></div>
+          </div>
+          <div class="pin" data-category="illustration">
+            <img src="/work/illustration/illustration-sealed.png" alt="Book cover for Naomi Booth's 'Sealed', Dead Ink Books" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">I created a cover design for Naomi Booth's horror novel "Sealed", published by Dead Ink Books.</p></div>
+          </div>
+          <div class="pin" data-category="illustration">
+            <img src="/work/illustration/illustration-war-horse.jpg" alt="Illustration for Michael Morpurgo's 'War Horse', Folio Society" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">An illustration for Michael Morpurgo's "War Horse", created for the Folio Society.</p></div>
+          </div>
+          <div class="pin" data-category="illustration">
+            <img src="/work/illustration/illustration-a4-magazine-mockup.png" alt="Circus comic spread — Ringling College 'Meanwhile' graphic novel anthology" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">Created a short comic for Ringling College of Art and Design's "Meanwhile" graphic novel anthology.</p></div>
+          </div>
+          <div class="pin" data-category="illustration">
+            <img src="/work/illustration/illustration-homeday.svg" alt="Homeday GmbH — icon and UI illustration set" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">Created a large set of icons and UI illustrations for Homeday GmbH.</p></div>
+          </div>
+
+          <div class="pin" data-category="graphic">
+            <img src="/work/graphic-design/graphic-design-mood-brochure.png" alt="Wohnvoll — brochure mockup" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">Created marketing assets for the service living company, Wohnvoll.</p></div>
+          </div>
+          <div class="pin" data-category="graphic">
+            <img src="/work/graphic-design/graphic-design-1.jpg" alt="Ziegert — Berlin real estate expose layout" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">I designed and laid out exposés for Ziegert for two of their Berlin real estate projects.</p></div>
+          </div>
+          <div class="pin" data-category="graphic">
+            <img src="/work/graphic-design/graphic-design-2.jpg" alt="Ziegert — Berlin real estate expose layout" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">I designed and laid out exposés for Ziegert for two of their Berlin real estate projects.</p></div>
+          </div>
+          <div class="pin" data-category="graphic">
+            <img src="/work/graphic-design/graphic-design-mockup.png" alt="Comedy Shorts — improv comedy group branding, poster mockup" loading="lazy" />
+            <div class="pin-overlay"><p class="pin-caption">I redesigned the logo and created new branding for the Berlin-based improv comedy group.</p></div>
+          </div>
+        </div>
+      </section>
+
       <section class="case-study">
         <div class="cs-meta">
           <span class="cs-date">2024–2026</span>
           <h2 class="cs-title">Blindmate Onboarding</h2>
         </div>
 
-        <p class="cs-description">Most dating apps onboard one type of user (you guessed it, the single). Blindmate is different because friends swipe for their singles as Matchmakers. (not to mention, you can do both — swipe for others and get matches at the same time…) That's three distinct user types, one front door, and a concept nobody's seen before. You can't use the app without your friends either, so the trust required to sign up is high.<br /><br />This is the story of rewiring a mental model for a dating app that flips the dating app script.</p>
+        <p class="cs-description">Most dating apps onboard one type of user (you guessed it, the single). Blindmate is different because friends swipe for their singles as Matchmakers. (Not to mention, you can do both — swipe for others and get matches at the same time…) That's three distinct user types, one front door, and a concept nobody's seen before. You can't use the app without your friends either, so the trust required to sign up is high.<br /><br />This is the story of rewiring a mental model for a dating app that flips the dating app script.</p>
 
         <div class="cs-cta">
           <a href="/blindmate-onboarding" class="btn-case-study">
@@ -603,7 +867,7 @@
           <h2 class="cs-title">Blindmate Premium</h2>
         </div>
 
-        <p class="cs-description">Blindmate is your friendly neighbourhood Spider-Man of dating apps — social, fair, on your side. So when it came time to build a monetization model, the rules were simple: don't hurt organic growth, don't break user trust.<br /><br />Two months, five features, a pricing model that trusts its users, and a conversion rate that beats Tinder. Not bad for the nice app.</p>
+        <p class="cs-description">Blindmate is your friendly neighborhood Spider-Man of dating apps — social, fair, on your side. So when it came time to build a monetization model, the rules were simple: don't hurt organic growth, don't break user trust.<br /><br />Two months, five features, a pricing model that trusts its users, and a conversion rate that beats Tinder. Not bad for the nice app.</p>
 
         <div class="cs-cta">
           <a href="/blindmate-premium" class="btn-case-study">
@@ -655,12 +919,15 @@
           <li><a href="https://magdalenadraws.com/" target="_blank" rel="noopener noreferrer">Illustration Portfolio</a></li>
           <li><a href="https://www.instagram.com/magdalenadraws/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         </ul>
-        <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the expressed written consent of the author.</p>
+        <p class="copyright">All works © Magdalena Szymaniec, 2026. This website was designed and vibe-coded by yours truly. Please do not reproduce without the express written consent of the author.</p>
       </footer>
     </div>
     <div id="cursor-pill"></div>
     <div id="lightbox" aria-hidden="true">
+      <button id="lightbox-close" type="button" aria-label="Close">&times;</button>
+      <button id="lightbox-prev" type="button" aria-label="Previous">&lsaquo;</button>
       <img id="lightbox-img" src="" alt="" />
+      <button id="lightbox-next" type="button" aria-label="Next">&rsaquo;</button>
       <p id="lightbox-caption"></p>
     </div>
 
@@ -795,6 +1062,99 @@
             document.body.style.overflow = 'hidden';
           });
         });
+      }
+
+      // Selected Work — filters
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const pins = document.querySelectorAll('.pin');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+          pins.forEach(pin => {
+            pin.classList.toggle('pin-hidden', filter !== 'all' && pin.dataset.category !== filter);
+          });
+        });
+      });
+
+      // Selected Work — lightbox (all devices)
+      {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeBtn = document.getElementById('lightbox-close');
+        const prevBtn = document.getElementById('lightbox-prev');
+        const nextBtn = document.getElementById('lightbox-next');
+        let pinItems = [];
+        let pinIdx = 0;
+        let pinLightboxActive = false;
+
+        function showPinAt(i) {
+          pinIdx = (i + pinItems.length) % pinItems.length;
+          const img = pinItems[pinIdx].querySelector('img');
+          const caption = pinItems[pinIdx].querySelector('.pin-caption');
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightboxCaption.textContent = caption ? caption.textContent : '';
+        }
+
+        function openPinLightbox(pin) {
+          pinItems = Array.from(pins).filter(p => !p.classList.contains('pin-hidden'));
+          pinIdx = pinItems.indexOf(pin);
+          pinLightboxActive = true;
+          showPinAt(pinIdx);
+          lightbox.classList.add('open');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closePinLightbox() {
+          pinLightboxActive = false;
+          lightbox.classList.remove('open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+
+        pins.forEach(pin => {
+          pin.addEventListener('click', () => openPinLightbox(pin));
+        });
+
+        closeBtn.addEventListener('click', e => { e.stopPropagation(); closePinLightbox(); });
+        prevBtn.addEventListener('click', e => { e.stopPropagation(); showPinAt(pinIdx - 1); });
+        nextBtn.addEventListener('click', e => { e.stopPropagation(); showPinAt(pinIdx + 1); });
+
+        lightbox.addEventListener('click', e => {
+          if (pinLightboxActive && e.target === lightbox) closePinLightbox();
+        });
+
+        document.addEventListener('keydown', e => {
+          if (!pinLightboxActive) return;
+          if (e.key === 'Escape') closePinLightbox();
+          if (e.key === 'ArrowLeft') showPinAt(pinIdx - 1);
+          if (e.key === 'ArrowRight') showPinAt(pinIdx + 1);
+        });
+
+        let pinTouchStartX = 0;
+        let pinDidSwipe = false;
+
+        lightbox.addEventListener('touchstart', e => {
+          if (!pinLightboxActive) return;
+          pinTouchStartX = e.touches[0].clientX;
+          pinDidSwipe = false;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchmove', e => {
+          if (!pinLightboxActive) return;
+          if (Math.abs(e.touches[0].clientX - pinTouchStartX) > 10) pinDidSwipe = true;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', e => {
+          if (!pinLightboxActive || !pinDidSwipe) return;
+          const dx = e.changedTouches[0].clientX - pinTouchStartX;
+          if (Math.abs(dx) > 50) showPinAt(pinIdx + (dx < 0 ? 1 : -1));
+        }, { passive: true });
       }
 
       // Page fade-out on navigation
