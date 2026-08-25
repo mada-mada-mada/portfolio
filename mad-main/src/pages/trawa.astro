@@ -211,6 +211,19 @@
         line-height: 1.6;
       }
 
+      .bullet-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-left: 20px;
+      }
+
+      .bullet-list li {
+        font-size: 0.9375rem;
+        color: #302b36;
+        line-height: 1.6;
+      }
+
       /* ── Image frame ── */
       .img-frame {
         margin: 0 -24px;
@@ -251,6 +264,60 @@
 
       .img-caption--center {
         text-align: center;
+      }
+
+      .img-scroll-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .img-scroll-row .wide-img {
+        flex: 1 1 0;
+        width: 0;
+        min-width: 0;
+        height: auto;
+      }
+
+      .strip-arrow {
+        flex-shrink: 0;
+        display: block;
+        opacity: 0.5;
+      }
+
+      .img-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .img-row .wide-img {
+        width: 100%;
+      }
+
+      .video-embed {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+      }
+
+      .video-embed iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .media-row {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .media-row > div {
+        min-width: 0;
       }
 
       /* ── Callout ── */
@@ -402,6 +469,44 @@
           min-width: 0;
         }
 
+        .img-scroll-row {
+          gap: 20px;
+        }
+
+        .img-row {
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 24px;
+        }
+
+        .img-row .wide-img {
+          width: auto;
+          height: 480px;
+        }
+
+        .media-row {
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          gap: 24px;
+        }
+
+        .media-row > div {
+          flex: 0 0 auto;
+          height: 360px;
+        }
+
+        .media-row .wide-img {
+          width: auto;
+          height: 360px;
+        }
+
+        .media-row .video-embed {
+          width: auto;
+          height: 360px;
+        }
+
         nav {
           padding: 16px clamp(48px, 8vw, 160px);
         }
@@ -436,6 +541,14 @@
         .body-text {
           font-size: 1rem;
           max-width: 68ch;
+        }
+
+        .bullet-list {
+          max-width: 68ch;
+        }
+
+        .bullet-list li {
+          font-size: 1rem;
         }
 
         .tldr-box {
@@ -500,7 +613,7 @@
       <div class="cs-tags">
         <span class="tag">B2B</span>
         <span class="tag">Energy Procurement Dashboard</span>
-        <span class="tag tag--meta">2 min read</span>
+        <span class="tag tag--meta">5 min read</span>
       </div>
     </div>
 
@@ -552,9 +665,85 @@
         <p class="body-text">What surprised us in early user interviews wasn't a design insight — it was a market one. The bar was low. Clients were genuinely impressed just to see their hourly consumption, or to have their invoices in one place without hunting for them. That gap became the first real signal that even the basics, done clearly, would be a meaningful upgrade for most of our users.</p>
       </div>
 
+      <div class="img-frame">
+        <div class="img-scroll-row">
+          <img class="wide-img" src="/trawa/first-version1.png" alt="Early whiteboard sketches — sustainability and volume overview concepts" data-caption="Iterations on the first version of Trawa dashboard, where users could see their consumption data." />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="wide-img" src="/trawa/first-version2.png" alt="First version wireframe — consumption overview with UI comments" data-caption="Iterations on the first version of Trawa dashboard, where users could see their consumption data." />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="wide-img" src="/trawa/first-version3.png" alt="First version — time range picker and measurement location results" data-caption="Iterations on the first version of Trawa dashboard, where users could see their consumption data." />
+          <svg class="strip-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#9b90cc" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          <img class="wide-img" src="/trawa/first-version4.png" alt="First version — refined dashboard with sidebar navigation and map" data-caption="Iterations on the first version of Trawa dashboard, where users could see their consumption data." />
+        </div>
+        <p class="img-caption img-caption--center">Iterations on the first version of Trawa dashboard, where users could see their consumption data.</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Customer stories</h2>
+        <p class="body-text">As the first release went out, we kept interviewing — and every conversation surfaced new needs that became the next round of the roadmap. I stayed close to clients as their dashboards grew, checking in on what was working and what wasn't. Clients running their own photovoltaic setups, for example, needed a way to see how much of their "own" electricity they were actually able to use versus draw from the grid — so we built that in.</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="img-row">
+          <img class="wide-img" src="/trawa/customer-story1.png" alt="User story — selecting a contract to see its data" data-caption="Some of the user stories we tackled after the initial release of the dashboard." />
+          <img class="wide-img" src="/trawa/customer-story2.png" alt="User story — predicted electricity costs for finance liquidity planning" data-caption="Some of the user stories we tackled after the initial release of the dashboard." />
+          <img class="wide-img" src="/trawa/customer-story3.png" alt="User story — PPA electricity usage versus spot market buy/sell" data-caption="Some of the user stories we tackled after the initial release of the dashboard." />
+        </div>
+        <p class="img-caption img-caption--center">Some of the user stories we tackled after the initial release of the dashboard.</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Sustainability as branding</h2>
+        <p class="body-text">For one client, the dashboard outgrew "internal tool" entirely — I set up their Energy Grid as a live TV display in their office lobby, for visitors and clients to see. Sustainability stopped being a line in a report and became something you walked past on your way to a meeting.</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="media-row">
+          <div>
+            <img class="wide-img" src="/trawa/lobby-display.png" alt="Trawa Energy Grid dashboard styled as a lobby TV display" />
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/FRfvcXW6Fvg" title="Trawa Energy Grid lobby display" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Expanding to battery steering and sales</h2>
+        <p class="body-text">The dashboard's usefulness wasn't limited to existing clients. I helped build a preview version for Sales to use with prospects — surfacing things like the best time to sign a contract based on trending prices, plus a live preview of how a prospect's own photovoltaic system would slot into the picture. When Trawa expanded into battery steering, that preview grew with it, so potential savings could be shown before a client ever signed.</p>
+      </div>
+
+      <div class="img-frame">
+        <div class="img-row">
+          <img class="wide-img" src="/trawa/spot-price.png" alt="Spot market electricity price chart with hourly breakdown" />
+          <img class="wide-img" src="/trawa/pv-analysis.png" alt="Consumption analysis with PV generation overlay and spot price fluctuation" />
+        </div>
+        <p class="img-caption img-caption--center">We worked on adding additional features to help users analyze their energy consumption, e.g. informing them about fluctuations in the spot market or showing them how their own photovoltaic production influences their consumption.</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">What I worked on</h2>
+        <ul class="bullet-list">
+          <li>Participated in user interviews at every stage of the dashboard's development</li>
+          <li>Worked closely with product management to shape jobs-to-be-done and prioritize the backlog</li>
+          <li>Partnered with internal and external backend engineers and data scientists to keep the data we displayed accurate and trustworthy</li>
+          <li>Collaborated with external frontend engineers to build a graph library for displaying consumption, spot market prices, and more</li>
+          <li>Designed a white paper on Trawa's mission and vision with the CEO and marketing team</li>
+          <li>Built the atomic design system the dashboard runs on</li>
+          <li>Onboarded new designers and product managers to the team</li>
+        </ul>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-title">Learnings</h2>
+        <p class="body-text">I walked into this project knowing nothing about electricity markets. I walked out understanding spot market trading, PPAs, photovoltaic systems, and battery steering well enough to design for them — and, more importantly, well enough to understand why our clients were so overwhelmed by their choices in the first place. Once I got the nuances, I got a lot better at reading their hesitations and answering the questions they hadn't asked yet.</p>
+        <p class="body-text">Part of the job was translation in both directions — sitting between data scientists and frontend engineers to get complex, high-stakes data in front of users in the most digestible form possible, without losing what made it trustworthy.</p>
+        <p class="body-text">One small but telling finding from testing: users trusted data more on light backgrounds. Dark dashboards read as more "sci-fi rocket cockpit" than "place I make financial decisions" — a good reminder that the mood of an interface says as much as its content does.</p>
+      </div>
+
       <div class="callout-box">
         <img class="callout-avatar" src="/premium/selfie.png" alt="Magdalena Szymaniec" />
-        <p class="callout-text">More of this case study is on the way. Curious in the meantime? Get in touch at <a href="mailto:magda.szymaniec@gmail.com">magda.szymaniec@gmail.com</a></p>
+        <p class="callout-text">Curious about this project?<br>Don't hesitate to get in touch at <a href="mailto:magda.szymaniec@gmail.com">magda.szymaniec@gmail.com</a></p>
       </div>
 
     </div>
